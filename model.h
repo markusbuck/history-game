@@ -7,6 +7,8 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPixmap>
+#include <QVector>
+#include <QRect>
 
 class Model : public QWidget
 {
@@ -15,10 +17,11 @@ class Model : public QWidget
 private:
     QTimer worldTimer;
     b2World* world;
-    b2Body* dynamicBody;
 
-    void createGround();
-    void createDynamicBody();
+    void createCollisionObject(float x, float y, float w, float h);
+
+    QVector<QRect> collisionObjects;
+    b2Body* player;
 
     QPixmap scene;
 

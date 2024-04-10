@@ -55,9 +55,13 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
+    door.cpp \
+    level.cpp \
     main.cpp \
     mainwindow.cpp \
-    model.cpp
+    model.cpp \
+    player.cpp \
+    wall.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -107,8 +111,12 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
+    door.h \
+    level.h \
     mainwindow.h \
-    model.h
+    model.h \
+    player.h \
+    wall.h
 
 FORMS += \
     mainwindow.ui
