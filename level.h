@@ -11,10 +11,13 @@ private:
     Player player;
     QVector<Wall> walls;
     QVector<Door> doors;
+
 public:
     bool isCollidingWall();
     bool isCollidingDoor();
     bool isLevelFinished();
+
+    Level(QVector<Wall> walls, QVector<Door> Doors, Player player);
 };
 
 #endif // LEVEL_H

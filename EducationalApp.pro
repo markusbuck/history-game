@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     door.cpp \
+    level.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \

@@ -5,11 +5,11 @@
 #include "wall.h"
 
 class Player {
-private:
+public:
     QPoint location;
 
     Wall hitBox;
-public:
+    Player();
     Player(QPoint location, Wall hitBox);
 
     void movePlayer(int x, int y);
