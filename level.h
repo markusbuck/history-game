@@ -8,7 +8,6 @@
 
 class Level {
 private:
-    Player player;
     QVector<Wall> walls;
     QVector<Door> doors;
 
@@ -17,7 +16,7 @@ public:
     bool isCollidingDoor();
     bool isLevelFinished();
 
-    Level(QVector<Wall> walls, QVector<Door> Doors, Player player);
+    Level(QVector<Wall> walls, QVector<Door> Doors);
 };
 
 #endif // LEVEL_H

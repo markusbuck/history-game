@@ -1,10 +1,9 @@
 #include "level.h"
 
-Level::Level(QVector<Wall> walls, QVector<Door> doors, Player player)
+Level::Level(QVector<Wall> walls, QVector<Door> doors)
 {
 	this->walls = walls;
 	this->doors = doors;
-	this->player = player;
 }
 
 bool Level::isCollidingWall()

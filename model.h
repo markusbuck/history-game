@@ -10,6 +10,7 @@
 #include <QVector>
 #include <QRect>
 #include "wall.h"
+#include "player.h"
 
 class Model : public QWidget
 {
@@ -24,7 +25,7 @@ private:
     void createCollisionObject(int x, int y, int w, int h);
 
     QVector<Wall> collisionObjects;
-    b2Body* player;
+    Player* player;
     float playerSpeed = 0;
     QPixmap scene;
 
@@ -33,14 +34,13 @@ private:
 public:
     Model(QWidget *parent = nullptr);
     ~Model();
-    enum Movement {moveLeft, moveRight, jump, stop};
-    Movement moveState;
 
 signals:
     void renderSceneOnView(QPixmap& scene);
 
-private slots:
+public slots:
     void worldStep();
+    void onPlayerMoveState(Player::Movement state);
 };
 
 #endif // MODEL_H

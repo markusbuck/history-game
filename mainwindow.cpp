@@ -12,6 +12,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->setupUi(this);
 
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
+    connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
 }
 
 MainWindow::~MainWindow()
@@ -34,15 +35,13 @@ void MainWindow::onSceneRender(QPixmap& scene)
 void MainWindow::keyPressEvent(QKeyEvent* event) {
     switch(event->key()) {
         case Qt::Key_Left:
-
-        this->model.moveState = Model::moveLeft;
+            emit setPlayerMoveState(Player::Movement::moveLeft);
             break;
         case Qt::Key_Right:
-            this->model.moveState = Model::moveRight;
+            emit setPlayerMoveState(Player::Movement::moveRight);
             break;
         case Qt::Key_Up:
-            qDebug() << "jump";
-            this->model.moveState = Model::jump;
+            emit setPlayerMoveState(Player::Movement::jump);
             break;
 
     }
@@ -51,10 +50,10 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
 void MainWindow::keyReleaseEvent(QKeyEvent* event) {
     switch(event->key()) {
     case Qt::Key_Left:
-        this->model.moveState = Model::stop;
+        emit setPlayerMoveState(Player::Movement::stop);
         break;
     case Qt::Key_Right:
-        this->model.moveState = Model::stop;
+        emit setPlayerMoveState(Player::Movement::stop);
         break;
     // case Qt::Key_Up:
     //     this->model.moveState = Model::stop;

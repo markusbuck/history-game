@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include "model.h"
+#include "player.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +26,10 @@ public slots:
     void onSceneRender(QPixmap& scene);
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
+
+signals:
+    void setPlayerMoveState(Player::Movement state);
+
 protected:
     void paintEvent(QPaintEvent* event) override;
 
