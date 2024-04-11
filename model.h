@@ -16,6 +16,7 @@ class Model : public QWidget
     Q_OBJECT
 
 private:
+
     QTimer worldTimer;
     b2World* world;
 
@@ -24,7 +25,7 @@ private:
 
     QVector<Wall> collisionObjects;
     b2Body* player;
-
+    float playerSpeed = 0;
     QPixmap scene;
 
     void renderScene();
@@ -32,6 +33,8 @@ private:
 public:
     Model(QWidget *parent = nullptr);
     ~Model();
+    enum Movement {moveLeft, moveRight, jump, stop};
+    Movement moveState;
 
 signals:
     void renderSceneOnView(QPixmap& scene);

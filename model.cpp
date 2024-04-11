@@ -8,7 +8,7 @@ Model::Model(QWidget *parent)
     , collisionObjects()
 {
     // Define the gravity vector.
-    b2Vec2 gravity(0.0f, 9.8);
+    b2Vec2 gravity(0.0f, -9.8);
 
     // Construct a world object, which will hold and simulate the rigid bodies.
     world = new b2World(gravity);
@@ -16,7 +16,7 @@ Model::Model(QWidget *parent)
     // player
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(5.0f, 10.0f); // center of player
+    bodyDef.position.Set(5.0f, -10.0f); // center of player
     player = world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(2.0, 6.0); // half sizes
@@ -27,15 +27,14 @@ Model::Model(QWidget *parent)
     player->CreateFixture(&fixtureDef);
 
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
-    createCollisionObject(0, 40, 100, 5);
-
-    QTimer::singleShot(3000, this, [this]{
-        player->ApplyLinearImpulse(b2Vec2(0, -500),  player->GetWorldCenter(), true);
-    });
+    createCollisionObject(0, -100, 100, 5);
 
     // Connect the world timer to the worldStep() function
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
     worldTimer.start(16); // 60 FPS
+
+    moveState = stop;
+    playerSpeed = 1000;
 }
 
 Model::~Model()
@@ -58,6 +57,33 @@ void Model::createCollisionObject(int x, int y, int width, int height)
 
 void Model::worldStep()
 {
+    b2Vec2 vel = player->GetLinearVelocity();
+
+    float desiredVel = 0;
+
+    switch(moveState) {
+        case moveLeft:
+            desiredVel = -playerSpeed;
+            break;
+        case moveRight:
+            desiredVel = playerSpeed;
+            break;
+        case stop:
+            desiredVel = 0;
+            break;
+        case jump:
+            float jumpImpulse = player->GetMass() * 25;
+            player->ApplyLinearImpulse(b2Vec2(0, jumpImpulse), player->GetWorldCenter(), true);
+            moveState = stop;
+            break;
+    }
+
+    float velChange = desiredVel - vel.x;
+    float impulse = player->GetMass() * velChange;
+
+
+    player->ApplyLinearImpulse(b2Vec2(impulse, 0), player->GetWorldCenter(), true);
+
     if (world) {
         world->Step(1.0f / 60.0f, 8, 3);
         renderScene();
@@ -70,7 +96,7 @@ void Model::renderScene() {
     QPainter painter(&pixmap);
 
     QTransform transform;
-    // transform.scale(10.0, 10.0);
+    transform.scale(1.0, -1.0);
     // transform.translate(0.0, -64.0);
     painter.setTransform(transform);
 

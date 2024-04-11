@@ -3,13 +3,15 @@
 
 #include <QPoint>
 #include "wall.h"
+#include <box2d/box2d.h>
 
 class Player {
 public:
+
+
     QPoint location;
 
-    Player();
-    Player(QPoint location);
+    Player(QPoint location, b2World* world);
 
     void movePlayer(int x, int y);
 };

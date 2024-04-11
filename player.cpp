@@ -1,10 +1,5 @@
 #include "player.h"
 
-
-Player::Player() {
-    this->location = QPoint();
-}
-
-Player::Player(QPoint location) {
+Player::Player(QPoint location, b2World* world) {
     this->location = location;
 }
