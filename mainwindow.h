@@ -23,7 +23,8 @@ public:
 
 public slots:
     void onSceneRender(QPixmap& scene);
-
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
 protected:
     void paintEvent(QPaintEvent* event) override;
 

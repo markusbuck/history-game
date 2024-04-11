@@ -6,6 +6,8 @@
 
 class Player {
 public:
+
+
     QPoint location;
 
     Wall hitBox;

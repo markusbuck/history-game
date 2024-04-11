@@ -31,6 +31,9 @@ Model::Model(QWidget *parent)
     // Connect the world timer to the worldStep() function
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
     worldTimer.start(16); // 60 FPS
+
+    moveState = stop;
+    playerSpeed = 1000;
 }
 
 Model::~Model()
@@ -51,6 +54,32 @@ void Model::createCollisionObject(float x, float y, float w, float h)
 
 void Model::worldStep()
 {
+    b2Vec2 vel = player->GetLinearVelocity();
+
+    float desiredVel = 0;
+
+    switch(moveState) {
+        case moveLeft:
+        desiredVel = -playerSpeed;
+            break;
+        case moveRight:
+            desiredVel = playerSpeed;
+            break;
+        case stop:
+            desiredVel = 0;
+            break;
+        case jump:
+            float jumpImpulse = player->GetMass() * -50;
+            player->ApplyLinearImpulse(b2Vec2(0, jumpImpulse), player->GetWorldCenter(), true);
+            break;
+    }
+
+    float velChange = desiredVel - vel.x;
+    float impulse = player->GetMass() * velChange;
+
+
+    player->ApplyLinearImpulse(b2Vec2(impulse, 0), player->GetWorldCenter(), true);
+
     if (world) {
         world->Step(1.0f / 60.0f, 8, 3);
         renderScene();

@@ -23,7 +23,8 @@ bool Level::isCollidingWall() {
             p2 = wall.p1;
         }
 
-        if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x()) {
+        if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x() && this->player.location.x() << p2.x() + wall.width + this->player.hitBox.width
+            && p1.y() - wall.width - this->player.hitBox.width < this->player.location.y()) {
 
             return true;
         }
