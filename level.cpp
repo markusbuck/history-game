@@ -8,25 +8,25 @@ Level::Level(QVector<Wall> walls, QVector<Door> doors, Player player) {
 
 bool Level::isCollidingWall() {
     for(Wall wall : this->walls) {
-        QPoint p1;
-        QPoint p2;
+        // QPoint p1;
+        // QPoint p2;
 
-        if(wall.p1.x() < wall.p2.x() || (wall.p1.y() < wall.p2.y())) {
+        // if(wall.p1.x() < wall.p2.x() || (wall.p1.y() < wall.p2.y())) {
 
-            p1 = wall.p1;
-            p2 = wall.p2;
-        }
+        //     p1 = wall.p1;
+        //     p2 = wall.p2;
+        // }
 
-        else {
+        // else {
 
-            p1 = wall.p2;
-            p2 = wall.p1;
-        }
+        //     p1 = wall.p2;
+        //     p2 = wall.p1;
+        // }
 
-        if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x()) {
+        // if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x()) {
 
-            return true;
-        }
+        //     return true;
+        // }
 
 
 

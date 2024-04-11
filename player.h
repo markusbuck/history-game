@@ -8,9 +8,8 @@ class Player {
 public:
     QPoint location;
 
-    Wall hitBox;
     Player();
-    Player(QPoint location, Wall hitBox);
+    Player(QPoint location);
 
     void movePlayer(int x, int y);
 };

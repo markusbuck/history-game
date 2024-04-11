@@ -3,10 +3,8 @@
 
 Player::Player() {
     this->location = QPoint();
-    this->hitBox = Wall();
 }
 
-Player::Player(QPoint location, Wall hitBox) {
+Player::Player(QPoint location) {
     this->location = location;
-    this->hitBox = hitBox;
 }

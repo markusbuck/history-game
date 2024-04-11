@@ -31,6 +31,8 @@ private:
     Ui::MainWindow *ui;
     Model& model;
     QPixmap scenePixmap;
+
+    QTransform transform;
 };
 
 #endif // MAINWINDOW_H

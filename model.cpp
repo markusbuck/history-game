@@ -8,7 +8,7 @@ Model::Model(QWidget *parent)
     , collisionObjects()
 {
     // Define the gravity vector.
-    b2Vec2 gravity(0.0f, 1920.0f);
+    b2Vec2 gravity(0.0f, 9.8);
 
     // Construct a world object, which will hold and simulate the rigid bodies.
     world = new b2World(gravity);
@@ -16,17 +16,22 @@ Model::Model(QWidget *parent)
     // player
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(0.0f, 4.0f);
+    bodyDef.position.Set(5.0f, 10.0f); // center of player
     player = world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(50.0f, 50.0f);
+    dynamicBox.SetAsBox(2.0, 6.0); // half sizes
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     player->CreateFixture(&fixtureDef);
 
-    createCollisionObject(0, 400, 400, 25);
+    // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
+    createCollisionObject(0, 40, 100, 5);
+
+    QTimer::singleShot(3000, this, [this]{
+        player->ApplyLinearImpulse(b2Vec2(0, -500),  player->GetWorldCenter(), true);
+    });
 
     // Connect the world timer to the worldStep() function
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
@@ -38,16 +43,18 @@ Model::~Model()
     delete world;
 }
 
-void Model::createCollisionObject(float x, float y, float w, float h)
+// void Model::createCollisionObject(QPoint p1, QPoint p2, int width)
+// {
+//     Wall newWall(p1, p2, width, world);
+//     collisionObjects.push_back(newWall);
+// }
+
+void Model::createCollisionObject(int x, int y, int width, int height)
 {
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(x, y);
-    b2Body* groundBody = world->CreateBody(&groundBodyDef);
-    b2PolygonShape groundBox;
-    groundBox.SetAsBox(w, h);
-    groundBody->CreateFixture(&groundBox, 0.0f);
-    collisionObjects.push_back(QRect(x, y - h - 2, w, h));
+    Wall newWall(x, y, width, height, world);
+    collisionObjects.push_back(newWall);
 }
+
 
 void Model::worldStep()
 {
@@ -62,15 +69,21 @@ void Model::renderScene() {
     pixmap.fill(Qt::white);
     QPainter painter(&pixmap);
 
+    QTransform transform;
+    // transform.scale(10.0, 10.0);
+    // transform.translate(0.0, -64.0);
+    painter.setTransform(transform);
+
     painter.setPen(Qt::NoPen);
 
     painter.setBrush(Qt::blue);
-    auto position = player->GetPosition();
-    painter.drawRect(position.x, position.y, 50.0, 50.0);
-
+    b2Vec2 playerPosition = player->GetPosition();
+    painter.drawRect(playerPosition.x, playerPosition.y, 4, 12);
+    // Render the walls
     painter.setBrush(Qt::red);
-    for (QRect box : collisionObjects)
-        painter.drawRect(box.x(), box.y(), box.width(), box.height());
+    for (const Wall& wall : collisionObjects) {
+        painter.drawRect(wall.x, wall.y, wall.width, wall.height);
+    }
 
     emit renderSceneOnView(pixmap);
 }

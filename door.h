@@ -3,6 +3,7 @@
 
 #include "wall.h"
 #include <QString>
+#include <box2d/box2d.h>
 
 class Door {
 private:
@@ -12,7 +13,7 @@ private:
     bool isCorrect;
 public:
     Door(QPoint location, Wall wall, QString questionText, bool isCorrect);
-    Door(QPoint location, QPoint point, QPoint point2, int width, QString questionText, bool isCorrect);
+    // Door(QPoint location, QPoint point, QPoint point2, int width, QString questionText, bool isCorrect, b2World* world);
 };
 
 

@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <QVector>
 #include <QRect>
+#include "wall.h"
 
 class Model : public QWidget
 {
@@ -18,9 +19,10 @@ private:
     QTimer worldTimer;
     b2World* world;
 
-    void createCollisionObject(float x, float y, float w, float h);
+    // void createCollisionObject(QPoint p1, QPoint p2, int width);
+    void createCollisionObject(int x, int y, int w, int h);
 
-    QVector<QRect> collisionObjects;
+    QVector<Wall> collisionObjects;
     b2Body* player;
 
     QPixmap scene;
