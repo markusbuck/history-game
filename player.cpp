@@ -1,13 +1,13 @@
 #include "player.h"
 
 Player::Player(QPoint location, b2World* world)
-    : width(32), height(96), movementStates() {
+    : width(8), height(16), movementStates() {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
     body = world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(width / 2.0, height / 2.0); // half sizes, 4w x 12h
+    dynamicBox.SetAsBox(width / 2.0 - .1, height / 2.0 - .1); // half sizes, 4w x 12h
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
@@ -47,6 +47,7 @@ void Player::step() {
     b2Vec2 vel = getVelocity();
 
     float desiredVel = 0;
+    float jumpVel = 0;
     // if(body->GetLinearVelocity().y != 0)
     //     return;
 
@@ -56,13 +57,12 @@ void Player::step() {
         desiredVel += walkSpeed;
 
     if (movementStates[Movement::jump]) {
-        float jumpImpulse = getMass() * -jumpPower;
-        applyImpulse(b2Vec2(0, jumpImpulse), getCenter());
+        jumpVel = getMass() * jumpPower;
         movementStates[Movement::jump] = false;
     }
 
     float velChange = desiredVel - vel.x;
-    float impulse = getMass() * desiredVel;
+    float impulse = getMass() * velChange;
 
-    applyImpulse(b2Vec2(impulse, 0), getCenter());
+    applyImpulse(b2Vec2(impulse, jumpVel), getCenter());
 }

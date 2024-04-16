@@ -7,10 +7,10 @@
 class Wall {
 
 public:
-    Wall(int x, int y, int w, int h, b2World* world);
+    Wall(float x, float y, float w, float h, b2World* world);
 
-    int width, height;
-    int x, y;
+    float x, y;
+    float width, height;
 };
 
 #endif // WALL_H

@@ -2,13 +2,16 @@
 #define PLAYER_H
 
 #include <QPoint>
-#include "wall.h"
 #include <box2d/box2d.h>
 #include <QMap>
 
 class Player {
 public:
     Player(QPoint location, b2World* world);
+
+    const int width, height;
+    float walkSpeed = 15.0;
+    float jumpPower = 10.0;
 
     void movePlayer(int x, int y);
 
@@ -26,10 +29,6 @@ public:
 
     // physics update
     void step();
-
-    const int width, height;
-    int walkSpeed = 2;
-    int jumpPower = 30;
 private:
     b2Body* body;
     Movement moveState = stop;

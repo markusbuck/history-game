@@ -4,19 +4,19 @@
 Model::Model(QWidget *parent)
     : QWidget(parent)
     , world(nullptr)
-    , scene(width(), height())
     , collisionObjects()
-    , elapsedTimer()
+    , scene(width(), height())
     , painter(&scene)
+    , elapsedTimer()
 {
-    b2Vec2 gravity(0.0f, 10.0);
+    b2Vec2 gravity(0.0f, -10.0);
     world = new b2World(gravity);
 
     // player
     player = new Player(QPoint(0, 0), world);
 
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
-    createCollisionObject(0, 440, 640, 40);
+    createCollisionObject(0., -50., 50., 5.);
 
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
     worldTimer.start();
@@ -67,21 +67,20 @@ void Model::worldStep()
 void Model::renderScene() {
     scene.fill(Qt::white);
 
-    QTransform transform;
-    transform.scale(1.0, 1.0);
-    // transform.translate(0.0, -64.0);
-    painter.setTransform(transform);
-
     painter.setPen(Qt::NoPen);
 
     painter.setBrush(Qt::blue);
-    b2Vec2 playerPosition = player->getTopLeft();
-    painter.drawRect(playerPosition.x, playerPosition.y, player->width, player->height);
+    b2Vec2 playerPosition = SCALE_FACTOR * player->getTopLeft();
+    painter.drawRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR);
     // Render the walls
     painter.setBrush(Qt::red);
     for (const Wall& wall : collisionObjects) {
-        painter.drawRect(wall.x, wall.y, wall.width, wall.height);
+        painter.drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
     }
+
+    QTransform transform;
+    transform.scale(1.0, -1.0);
+    painter.setTransform(transform);
 
     emit renderSceneOnView(scene);
 }

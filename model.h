@@ -11,6 +11,7 @@
 #include <QRect>
 #include "wall.h"
 #include "player.h"
+#include "config.h"
 #include <QElapsedTimer>
 
 class Model : public QWidget
