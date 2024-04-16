@@ -3,7 +3,7 @@
 #define MODEL_H
 
 #include <QTimer>
-#include <box2d/box2d.h>
+#include <box2D/box2D.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPixmap>

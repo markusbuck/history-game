@@ -47,6 +47,8 @@ void Player::step() {
     b2Vec2 vel = getVelocity();
 
     float desiredVel = 0;
+    if(body->GetLinearVelocity().y != 0)
+        return;
 
     switch(moveState) {
     case moveLeft:
