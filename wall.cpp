@@ -8,4 +8,5 @@ Wall::Wall(int x, int y, int w, int h, b2World* world)
     b2PolygonShape box;
     box.SetAsBox((float)width / 2.0, (float)height / 2.0);
     wallBody->CreateFixture(&box, 0.0f);
+
 }
