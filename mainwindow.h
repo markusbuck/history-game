@@ -29,7 +29,7 @@ public slots:
     void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
-    void setPlayerMoveState(Player::Movement state);
+    void setPlayerMoveState(Player::Movement state, bool isDown);
 
 protected:
     void paintEvent(QPaintEvent* event) override;

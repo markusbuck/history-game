@@ -11,6 +11,7 @@
 #include <QRect>
 #include "wall.h"
 #include "player.h"
+#include <QElapsedTimer>
 
 class Model : public QWidget
 {
@@ -27,7 +28,13 @@ private:
     QVector<Wall> collisionObjects;
     Player* player;
     float playerSpeed = 0;
+
     QPixmap scene;
+    QPainter painter;
+
+    QElapsedTimer elapsedTimer;
+    qint64 lastFrameTime = 0;
+    const qint64 FRAME_TIME_TARGET = 1e9 / 60;
 
     void renderScene();
 
@@ -40,7 +47,7 @@ signals:
 
 public slots:
     void worldStep();
-    void onPlayerMoveState(Player::Movement state);
+    void onPlayerMoveState(Player::Movement state, bool isDown);
 };
 
 #endif // MODEL_H

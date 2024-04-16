@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player(QPoint location, b2World* world)
-    : width(32), height(96) {
+    : width(32), height(96), movementStates() {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
@@ -37,8 +37,8 @@ b2Vec2 Player::getTopLeft() {
 
 //
 
-void Player::setMoveState(Movement state) {
-    moveState = state;
+void Player::setMoveState(Movement state, bool isDown) {
+    movementStates[state] = isDown;
 }
 
 //
@@ -47,28 +47,22 @@ void Player::step() {
     b2Vec2 vel = getVelocity();
 
     float desiredVel = 0;
-    if(body->GetLinearVelocity().y != 0)
-        return;
+    // if(body->GetLinearVelocity().y != 0)
+    //     return;
 
-    switch(moveState) {
-    case moveLeft:
-        desiredVel = -walkSpeed;
-        break;
-    case moveRight:
-        desiredVel = walkSpeed;
-        break;
-    case stop:
-        desiredVel = 0;
-        break;
-    case jump:
+    if (movementStates[Movement::keyLeft])
+        desiredVel += -walkSpeed;
+    if (movementStates[Movement::keyRight])
+        desiredVel += walkSpeed;
+
+    if (movementStates[Movement::jump]) {
         float jumpImpulse = getMass() * -jumpPower;
         applyImpulse(b2Vec2(0, jumpImpulse), getCenter());
-        moveState = stop;
-        break;
+        movementStates[Movement::jump] = false;
     }
 
     float velChange = desiredVel - vel.x;
-    float impulse = getMass() * velChange;
+    float impulse = getMass() * desiredVel;
 
     applyImpulse(b2Vec2(impulse, 0), getCenter());
 }

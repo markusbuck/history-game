@@ -4,6 +4,7 @@
 #include <QPoint>
 #include "wall.h"
 #include <box2d/box2d.h>
+#include <QMap>
 
 class Player {
 public:
@@ -19,15 +20,16 @@ public:
     b2Vec2 getTopLeft();
 
     // state update
-    enum Movement {moveLeft, moveRight, jump, stop};
-    void setMoveState(Movement state);
+    enum Movement {keyLeft, keyRight, jump, stop};
+    void setMoveState(Movement state, bool isDown);
+    QMap<Movement, bool> movementStates;
 
     // physics update
     void step();
 
     const int width, height;
-    int walkSpeed = 1000;
-    int jumpPower = 200;
+    int walkSpeed = 2;
+    int jumpPower = 30;
 private:
     b2Body* body;
     Movement moveState = stop;
