@@ -11,6 +11,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
 {
     ui->setupUi(this);
 
+    doorQuestionDialog.setModal(true);
+    doorQuestionDialog.show();
+
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
 }

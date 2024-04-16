@@ -7,6 +7,7 @@
 #include <QPainter>
 #include "model.h"
 #include "player.h"
+#include "doorquestiondialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -37,6 +38,7 @@ private:
     Ui::MainWindow *ui;
     Model& model;
     QPixmap scenePixmap;
+    DoorQuestionDialog doorQuestionDialog;
 
     QTransform transform;
 };

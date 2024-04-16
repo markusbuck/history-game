@@ -56,6 +56,7 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     door.cpp \
+    doorquestiondialog.cpp \
     level.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -112,6 +113,7 @@ HEADERS += \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
     door.h \
+    doorquestiondialog.h \
     level.h \
     mainwindow.h \
     model.h \
@@ -119,6 +121,7 @@ HEADERS += \
     wall.h
 
 FORMS += \
+    doorquestiondialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
