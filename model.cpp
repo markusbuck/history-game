@@ -1,9 +1,11 @@
 // model.cpp
 #include "model.h"
+#include "contactlistener.h"
 
 Model::Model(QWidget *parent)
     : QWidget(parent)
     , world(nullptr)
+    , worldContact(new ContactListener())
     , collisionObjects()
     , scene(width(), height())
     , painter(&scene)
@@ -11,9 +13,12 @@ Model::Model(QWidget *parent)
 {
     b2Vec2 gravity(0.0f, -10.0);
     world = new b2World(gravity);
+    world->SetContactListener(worldContact);
+
+    worldState = { world, worldContact };
 
     // player
-    player = new Player(QPoint(0, 0), world);
+    player = new Player(QPoint(0, 0), &worldState);
 
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
     createCollisionObject(0., -50., 50., 5.);
@@ -36,7 +41,7 @@ Model::~Model()
 
 void Model::createCollisionObject(int x, int y, int width, int height)
 {
-    Wall newWall(x, y, width, height, world);
+    Wall newWall(x, y, width, height, &worldState);
     collisionObjects.push_back(newWall);
 }
 
@@ -58,7 +63,7 @@ void Model::worldStep()
 
         qreal frameRate = 1e9 / static_cast<qreal>(elapsedTime);
         int roundedFrameRate = qRound(frameRate);
-        qDebug() << "Frame Rate:" << roundedFrameRate << "FPS";
+        // qDebug() << "Frame Rate:" << roundedFrameRate << "FPS";
     }
 
     renderScene();

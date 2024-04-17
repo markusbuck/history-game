@@ -1,11 +1,12 @@
 #include "player.h"
+#include <QDebug>
 
-Player::Player(QPoint location, b2World* world)
+Player::Player(QPoint location, WorldState* worldState)
     : width(8), height(16), movementStates() {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
-    body = world->CreateBody(&bodyDef);
+    body = worldState->world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(width / 2.0 - .1, height / 2.0 - .1); // half sizes, 4w x 12h
     b2FixtureDef fixtureDef;
@@ -13,6 +14,13 @@ Player::Player(QPoint location, b2World* world)
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
+
+    worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
+        if (began)
+            currentContacts++;
+        else
+            currentContacts--;
+    });
 }
 
 void Player::applyImpulse(b2Vec2 impulse, b2Vec2 position) {
@@ -56,7 +64,7 @@ void Player::step() {
     if (movementStates[Movement::keyRight])
         desiredVel += walkSpeed;
 
-    if (movementStates[Movement::jump]) {
+    if (movementStates[Movement::jump] && currentContacts >= 1) {
         jumpVel = getMass() * jumpPower;
         movementStates[Movement::jump] = false;
     }

@@ -55,6 +55,7 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
+    contactlistener.cpp \
     door.cpp \
     doorquestiondialog.cpp \
     level.cpp \
@@ -112,7 +113,8 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
-    config.h \
+    WorldState.h \
+    contactlistener.h \
     door.h \
     doorquestiondialog.h \
     level.h \

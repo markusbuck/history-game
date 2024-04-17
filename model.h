@@ -11,8 +11,10 @@
 #include <QRect>
 #include "wall.h"
 #include "player.h"
-#include "config.h"
 #include <QElapsedTimer>
+#include "WorldState.h"
+
+const float SCALE_FACTOR = 5.0;
 
 class Model : public QWidget
 {
@@ -22,6 +24,8 @@ private:
 
     QTimer worldTimer;
     b2World* world;
+    WorldState worldState;
+    ContactListener *worldContact;
 
     // void createCollisionObject(QPoint p1, QPoint p2, int width);
     void createCollisionObject(int x, int y, int w, int h);

@@ -4,14 +4,17 @@
 #include <QPoint>
 #include <box2d/box2d.h>
 #include <QMap>
+#include "WorldState.h"
 
 class Player {
 public:
-    Player(QPoint location, b2World* world);
+    Player(QPoint location, WorldState* worldState);
 
     const int width, height;
     float walkSpeed = 15.0;
     float jumpPower = 10.0;
+
+    int currentContacts = 0;
 
     void movePlayer(int x, int y);
 

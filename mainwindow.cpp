@@ -12,7 +12,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->setupUi(this);
 
     doorQuestionDialog.setModal(true);
-    // doorQuestionDialog.show();
+    doorQuestionDialog.show();
 
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
@@ -37,6 +37,7 @@ void MainWindow::onSceneRender(QPixmap& scene)
 
 void MainWindow::keyPressEvent(QKeyEvent* event) {
     switch(event->key()) {
+        // arrow keys
         case Qt::Key_Left:
             emit setPlayerMoveState(Player::Movement::keyLeft, true);
             break;
@@ -46,20 +47,40 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
         case Qt::Key_Up:
             emit setPlayerMoveState(Player::Movement::jump, true);
             break;
-
+        // a, d, space
+        case Qt::Key_A:
+            emit setPlayerMoveState(Player::Movement::keyLeft, true);
+            break;
+        case Qt::Key_D:
+            emit setPlayerMoveState(Player::Movement::keyRight, true);
+            break;
+        case Qt::Key_Space:
+            emit setPlayerMoveState(Player::Movement::jump, true);
+            break;
     }
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent* event) {
     switch(event->key()) {
-    case Qt::Key_Left:
-        emit setPlayerMoveState(Player::Movement::keyLeft, false);
-        break;
-    case Qt::Key_Right:
-        emit setPlayerMoveState(Player::Movement::keyRight, false);
-        break;
-    // case Qt::Key_Up:
-    //     this->model.moveState = Model::stop;
-    //     break;
+        // arrow keys
+        case Qt::Key_Left:
+            emit setPlayerMoveState(Player::Movement::keyLeft, false);
+            break;
+        case Qt::Key_Right:
+            emit setPlayerMoveState(Player::Movement::keyRight, false);
+            break;
+        case Qt::Key_Up:
+            emit setPlayerMoveState(Player::Movement::jump, false);
+            break;
+        // a, d, space
+        case Qt::Key_A:
+            emit setPlayerMoveState(Player::Movement::keyLeft, false);
+            break;
+        case Qt::Key_D:
+            emit setPlayerMoveState(Player::Movement::keyRight, false);
+            break;
+        case Qt::Key_Space:
+            emit setPlayerMoveState(Player::Movement::jump, false);
+            break;
     }
 }
