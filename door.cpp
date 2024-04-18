@@ -1,5 +1,5 @@
 #include "door.h"
-
+#include <QDebug>
 // Door::Door(QPoint location, QPoint p1, QPoint p2, int width, QString questionText, bool isCorrect, b2World* world)
 //     : location(location), questionText(questionText), isCorrect(isCorrect), hitBox(p1, p2, width, world) {
 // }
@@ -16,6 +16,7 @@ void Door::insertQuesionResponse(QString text, bool isCorrect) {
 
 bool Door::isCorrectResponse(QString key) {
     if(questionResponses.contains(key)) {
+
         return questionResponses.value(key);
     }
 

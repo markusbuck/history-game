@@ -20,6 +20,24 @@ Model::Model(QWidget *parent)
     // player
     player = new Player(QPoint(0, 0), &worldState);
 
+    QVector<Wall> walls;
+    QVector<Door> doors;
+
+    Wall wall(0, 0, 0, 0, &worldState);
+
+    // Create levels question
+    Door door(QPoint(), wall, "George Washington was born in...", false);
+    door.insertQuesionResponse("March 11, 1690", false);
+    door.insertQuesionResponse("April 20, 1215", false);
+    door.insertQuesionResponse("February 22, 1732", true);
+    door.insertQuesionResponse("December 9, 2025", false);
+
+    walls.append(wall);
+
+    doors.append(door);
+
+    level = new Level(walls, doors);
+
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
     createCollisionObject(0., -50., 50., 5.);
 
@@ -92,4 +110,18 @@ void Model::renderScene() {
 
 void Model::onPlayerMoveState(Player::Movement state, bool isDown) {
     player->setMoveState(state, isDown);
+}
+
+void Model::onDoorCollisionState() {
+    //qDebug() << this->level->doors.at(0).questionText;
+    //qDebug() << this->level->doors.at(0).questionResponses.keys();
+
+    emit generateQuestionnaire(this->level->doors.at(0).questionText, this->level->doors.at(0).questionResponses);
+}
+
+void Model::isInputCorrect(QString response) {
+
+    bool isCorrect = this->level->isCorrectResponse(response);
+    // qDebug() << "Should be: " << isCorrect;
+    emit displayPopUp(isCorrect);
 }

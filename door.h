@@ -10,8 +10,7 @@ class Door {
 private:
     QPoint location;
     Wall hitBox;
-    QString questionText;
-    QHash<QString, bool> questionResponses;
+
     bool isCorrect;
 public:
     Door(QPoint location, Wall wall, QString questionText, bool isCorrect);
@@ -20,10 +19,8 @@ public:
 
     bool isCorrectResponse(QString key);
 
-
-
-
-
+    QString questionText;
+    QHash<QString, bool> questionResponses;
 
 };
 

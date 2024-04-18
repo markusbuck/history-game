@@ -12,10 +12,20 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->setupUi(this);
 
     doorQuestionDialog.setModal(true);
-    doorQuestionDialog.show();
+    //doorQuestionDialog.show();
+    //doorQuestionDialog.hide();
 
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
+
+    //door
+    connect(this, &MainWindow::doorCollision, &model, &Model::onDoorCollisionState);
+
+    connect(&model, &Model::generateQuestionnaire, &doorQuestionDialog, &DoorQuestionDialog::onPlayerCollision);
+
+    connect(&doorQuestionDialog, &DoorQuestionDialog::sendQuestionText, &model, &Model::isInputCorrect);
+
+    connect(&model, &Model::displayPopUp, &doorQuestionDialog, &DoorQuestionDialog::displayPopUp);
 }
 
 MainWindow::~MainWindow()
@@ -56,6 +66,9 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
             break;
         case Qt::Key_Space:
             emit setPlayerMoveState(Player::Movement::jump, true);
+            break;
+        case Qt::Key_P:
+            emit doorCollision();
             break;
     }
 }

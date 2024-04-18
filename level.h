@@ -9,12 +9,12 @@
 class Level {
 private:
     QVector<Wall> walls;
-    QVector<Door> doors;
-
 public:
     bool isCollidingWall();
     bool isCollidingDoor();
     bool isLevelFinished();
+    bool isCorrectResponse(QString response);
+    QVector<Door> doors;
 
     Level(QVector<Wall> walls, QVector<Door> Doors);
 };

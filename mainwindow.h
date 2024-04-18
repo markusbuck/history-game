@@ -30,6 +30,7 @@ public slots:
 
 signals:
     void setPlayerMoveState(Player::Movement state, bool isDown);
+    void doorCollision();
 
 protected:
     void paintEvent(QPaintEvent* event) override;

@@ -13,6 +13,7 @@
 #include "player.h"
 #include <QElapsedTimer>
 #include "WorldState.h"
+#include "level.h"
 
 const float SCALE_FACTOR = 5.0;
 
@@ -37,6 +38,7 @@ private:
     QPixmap scene;
     QPainter painter;
 
+    Level* level;
     QElapsedTimer elapsedTimer;
     qint64 lastFrameTime = 0;
     const qint64 FRAME_TIME_TARGET = 1e9 / 60;
@@ -49,10 +51,13 @@ public:
 
 signals:
     void renderSceneOnView(QPixmap& scene);
-
+    void generateQuestionnaire(QString questionText, QHash<QString, bool> responses);
+    void displayPopUp(bool input);
 public slots:
     void worldStep();
     void onPlayerMoveState(Player::Movement state, bool isDown);
+    void onDoorCollisionState();
+    void isInputCorrect(QString response);
 };
 
 #endif // MODEL_H

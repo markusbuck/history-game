@@ -19,10 +19,19 @@ private:
     Ui::DoorQuestionDialog *ui;
 
 public slots:
-    void onPlayerCollision();
+    void onPlayerCollision(QString questionText, QHash<QString, bool> responses);
+    void displayQuestionnaire(bool isDisplaying);
+    void onClickedResponse1();
+    void onClickedResponse2();
+    void onClickedResponse3();
+    void onClickedResponse4();
+    void displayPopUp(bool response);
+    void hidePopUp();
+
 signals:
-    void toggleQuesionnaire(bool toggle);
+    void toggleQuestionnaire(bool toggle);
     void onResponseChoice(QString key);
+    void sendQuestionText(QString questionText);
 };
 
 #endif // DOORQUESTIONDIALOG_H

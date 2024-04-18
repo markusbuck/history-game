@@ -39,3 +39,10 @@ bool Level::isCollidingWall()
 		return false;
 	}
 }
+
+
+bool Level::isCorrectResponse(QString response) {
+    Door door = this->doors.at(0);
+
+    return door.isCorrectResponse(response);
+}
