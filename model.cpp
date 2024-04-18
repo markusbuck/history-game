@@ -101,8 +101,18 @@ void Model::renderScene() {
     painter.setPen(Qt::NoPen);
 
     painter.setBrush(Qt::blue);
-    b2Vec2 playerPosition = SCALE_FACTOR * player->getTopLeft();
-    painter.drawRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR);
+    // b2Vec2 playerPosition = SCALE_FACTOR * player->getTopLeft();
+    // QImage sprite(":/rightWalking0");
+    // sprite.mirror(false, true);
+    // painter.save();
+
+    // painter.drawImage(QRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR),
+    //                   sprite,
+    //                   QRect(0, 6, 100, 100));
+    // painter.restore();
+    //painter.drawRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR);
+
+    player->render(&painter);
     // Render the walls
     painter.setBrush(Qt::red);
     for (const Wall& wall : collisionObjects) {

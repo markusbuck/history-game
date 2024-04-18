@@ -5,6 +5,7 @@
 #include <box2d/box2d.h>
 #include <QMap>
 #include "WorldState.h"
+#include "spritesheet.h"
 
 class Player {
 public:
@@ -17,6 +18,8 @@ public:
     int currentContacts = 0;
 
     void movePlayer(int x, int y);
+
+    void render(QPainter *painter);
 
     // b2Body methods
     b2Vec2 getVelocity();
@@ -33,6 +36,7 @@ public:
     // physics update
     void step();
 private:
+    spriteSheet sprite;
     b2Body* body;
     Movement moveState = stop;
 };

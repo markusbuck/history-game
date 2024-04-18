@@ -15,7 +15,6 @@
 #include "WorldState.h"
 #include "level.h"
 
-const float SCALE_FACTOR = 5.0;
 
 class Model : public QWidget
 {
