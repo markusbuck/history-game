@@ -1,5 +1,6 @@
 #include "door.h"
 #include <QDebug>
+#include <QRandomGenerator>
 // Door::Door(QPoint location, QPoint p1, QPoint p2, int width, QString questionText, bool isCorrect, b2World* world)
 //     : location(location), questionText(questionText), isCorrect(isCorrect), hitBox(p1, p2, width, world) {
 // }
@@ -21,4 +22,19 @@ bool Door::isCorrectResponse(QString key) {
     }
 
     return false;
+}
+
+void Door::insertHint(QString hint) {
+    hints.append(hint);
+}
+
+QString Door::generateHint(bool isCorrect) {
+
+    if(isCorrect) {
+        return correctText;
+    }
+
+    int randNum = QRandomGenerator::global()->bounded(4);
+
+    return hints.at(randNum);
 }

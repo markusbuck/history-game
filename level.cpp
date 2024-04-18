@@ -41,8 +41,14 @@ bool Level::isCollidingWall()
 }
 
 
-bool Level::isCorrectResponse(QString response) {
-    Door door = this->doors.at(0);
+bool Level::isCorrectResponse(QString response, int doorIndex) {
+    Door door = doors.at(doorIndex);
 
     return door.isCorrectResponse(response);
+}
+
+QString Level::generateHintResponse(QString response, int doorIndex) {
+    Door door = doors.at(doorIndex);
+
+    return door.generateHint(door.isCorrectResponse(response));
 }

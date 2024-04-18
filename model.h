@@ -38,7 +38,9 @@ private:
     QPixmap scene;
     QPainter painter;
 
-    Level* level;
+    int currentLevel = 0;
+    QList<Level> levels;
+
     QElapsedTimer elapsedTimer;
     qint64 lastFrameTime = 0;
     const qint64 FRAME_TIME_TARGET = 1e9 / 60;
@@ -52,7 +54,7 @@ public:
 signals:
     void renderSceneOnView(QPixmap& scene);
     void generateQuestionnaire(QString questionText, QHash<QString, bool> responses);
-    void displayPopUp(bool input);
+    void displayPopUp(bool input, QString answer);
 public slots:
     void worldStep();
     void onPlayerMoveState(Player::Movement state, bool isDown);

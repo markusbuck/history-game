@@ -13,7 +13,8 @@ public:
     bool isCollidingWall();
     bool isCollidingDoor();
     bool isLevelFinished();
-    bool isCorrectResponse(QString response);
+    bool isCorrectResponse(QString response, int doorIndex);
+    QString generateHintResponse(QString response,int doorIndex);
     QVector<Door> doors;
 
     Level(QVector<Wall> walls, QVector<Door> Doors);

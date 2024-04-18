@@ -26,7 +26,7 @@ public slots:
     void onClickedResponse2();
     void onClickedResponse3();
     void onClickedResponse4();
-    void displayPopUp(bool response);
+    void displayPopUp(bool response, QString answer);
     void hidePopUp();
 
 signals:

@@ -32,11 +32,19 @@ Model::Model(QWidget *parent)
     door.insertQuesionResponse("February 22, 1732", true);
     door.insertQuesionResponse("December 9, 2025", false);
 
+
+    door.insertHint("George Washington had no biological children.");
+    door.insertHint("George Washingtons dentures\n were not made of wood.");
+    door.insertHint("George Washington loved to party.");
+    door.insertHint("Hint 4");
+
+
     walls.append(wall);
 
     doors.append(door);
 
-    level = new Level(walls, doors);
+    Level level1(walls, doors);
+    levels.append(level1);
 
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
     createCollisionObject(0., -50., 50., 5.);
@@ -113,15 +121,17 @@ void Model::onPlayerMoveState(Player::Movement state, bool isDown) {
 }
 
 void Model::onDoorCollisionState() {
-    //qDebug() << this->level->doors.at(0).questionText;
-    //qDebug() << this->level->doors.at(0).questionResponses.keys();
+    QString doorQuestionText = levels.at(currentLevel).doors.at(0).questionText;
 
-    emit generateQuestionnaire(this->level->doors.at(0).questionText, this->level->doors.at(0).questionResponses);
+    QHash<QString, bool> questionResponses = levels.at(currentLevel).doors.at(0).questionResponses;
+
+    emit generateQuestionnaire(doorQuestionText, questionResponses);
 }
 
 void Model::isInputCorrect(QString response) {
+    Level level = levels.at(currentLevel);
 
-    bool isCorrect = this->level->isCorrectResponse(response);
-    // qDebug() << "Should be: " << isCorrect;
-    emit displayPopUp(isCorrect);
+    bool isCorrect = level.isCorrectResponse(response, 0);
+    QString messagePopUp = level.generateHintResponse(response, 0);
+    emit displayPopUp(isCorrect, messagePopUp);
 }

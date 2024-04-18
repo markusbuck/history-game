@@ -52,27 +52,25 @@ void DoorQuestionDialog::displayQuestionnaire(bool isDisplaying) {
 }
 
 void DoorQuestionDialog::onClickedResponse1() {
-    //qDebug() << ui->Response1->text();
     emit sendQuestionText(ui->Response1->text());
 }
 
 void DoorQuestionDialog::onClickedResponse2() {
-    //qDebug() << ui->Response2->text();
     emit sendQuestionText(ui->Response2->text());
 }
 
 void DoorQuestionDialog::onClickedResponse3() {
-    //qDebug() << ui->Response3->text();
     emit sendQuestionText(ui->Response3->text());
 }
 
 void DoorQuestionDialog::onClickedResponse4() {
-    //qDebug() << ui->Response4->text();
     emit sendQuestionText(ui->Response4->text());
 }
 
-void DoorQuestionDialog::displayPopUp(bool response) {
-    QString text = response == true ? "That is correct!" : "That is not correct!";
+void DoorQuestionDialog::displayPopUp(bool response, QString answer) {
+    QString text = response == true ? "That is correct!\n\n" : "That is not correct!\n\n";
+    text += answer;
+
     toggleResponseButtons(false);
 
     if(response) {
