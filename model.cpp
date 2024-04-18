@@ -26,7 +26,7 @@ Model::Model(QWidget *parent)
     Wall wall(0, 0, 0, 0, &worldState);
 
     // Create levels question
-    Door door(QPoint(), wall, "George Washington was born in...", false);
+    Door door(QPoint(40, -45), wall, "George Washington was born in...", &worldState);
     door.insertQuesionResponse("March 11, 1690", false);
     door.insertQuesionResponse("April 20, 1215", false);
     door.insertQuesionResponse("February 22, 1732", true);
@@ -108,6 +108,14 @@ void Model::renderScene() {
     for (const Wall& wall : collisionObjects) {
         painter.drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
     }
+
+    painter.setBrush(Qt::green);
+
+    Door door = levels.at(currentLevel).doors.at(0);
+
+    b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
+    painter.drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
+
 
     QTransform transform;
     transform.scale(1.0, -1.0);
