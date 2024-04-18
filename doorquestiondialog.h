@@ -14,6 +14,7 @@ class DoorQuestionDialog : public QDialog
 public:
     explicit DoorQuestionDialog(QWidget *parent = nullptr);
     ~DoorQuestionDialog();
+    void toggleResponseButtons(bool toggle);
 
 private:
     Ui::DoorQuestionDialog *ui;

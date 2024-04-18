@@ -73,11 +73,33 @@ void DoorQuestionDialog::onClickedResponse4() {
 
 void DoorQuestionDialog::displayPopUp(bool response) {
     QString text = response == true ? "That is correct!" : "That is not correct!";
+    toggleResponseButtons(false);
 
-    ui->Popup->setText(text);
+    if(response) {
+        ui->Popup->setStyleSheet(
+            QString("QPushButton {color: white; background-color: "
+                    "rgb(0, 153, 0);} QPushButton:pressed {background-color: "
+                    "rgb(0,204,0);}")); ui->Popup->setText(text);
+    }
+
+    else {
+        ui->Popup->setStyleSheet(
+            QString("QPushButton {color: white; background-color: "
+                    "rgb(255, 0, 0);} QPushButton:pressed {background-color: "
+                    "rgb(255,51,51);}"));    ui->Popup->setText(text);
+    }
+
     ui->Popup->show();
 }
 
 void DoorQuestionDialog::hidePopUp() {
     ui->Popup->hide();
+    toggleResponseButtons(true);
+}
+
+void DoorQuestionDialog::toggleResponseButtons(bool toggle) {
+    ui->Response1->setEnabled(toggle);
+    ui->Response2->setEnabled(toggle);
+    ui->Response3->setEnabled(toggle);
+    ui->Response4->setEnabled(toggle);
 }

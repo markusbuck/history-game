@@ -23,15 +23,15 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
-     <widget class="QPushButton" name="Response4">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="Response1">
       <property name="text">
        <string>PushButton</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="Response1">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="Response3">
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -44,8 +44,8 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="Response3">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="Response4">
       <property name="text">
        <string>PushButton</string>
       </property>
