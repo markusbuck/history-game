@@ -63,6 +63,7 @@ SOURCES += \
     mainwindow.cpp \
     model.cpp \
     player.cpp \
+    spritesheet.cpp \
     wall.cpp
 
 HEADERS += \
@@ -121,6 +122,7 @@ HEADERS += \
     mainwindow.h \
     model.h \
     player.h \
+    spritesheet.h \
     wall.h
 
 FORMS += \
@@ -135,3 +137,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     Box2D/Box2DConfig.cmake \
     Box2D/CMakeLists.txt
+
+RESOURCES += \
+    sprites.qrc

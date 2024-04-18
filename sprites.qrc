@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>right.png</file>
+        <file>rightWalking0.png</file>
+    </qresource>
+</RCC>

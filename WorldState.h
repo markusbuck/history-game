@@ -4,6 +4,8 @@
 #include <box2D/box2D.h>
 #include "contactlistener.h"
 
+const float SCALE_FACTOR = 5.0;
+
 struct WorldState {
     b2World* world;
     ContactListener *worldContact;
