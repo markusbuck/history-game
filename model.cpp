@@ -50,6 +50,9 @@ Model::Model(QWidget *parent)
     createCollisionObject(0., -50., 50., 5.);
 
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
+
+    connect(&(*player), &Player::onDoorContact, this, &Model::onDoorCollisionState);
+
     worldTimer.start();
     elapsedTimer.start();
 }
@@ -111,6 +114,7 @@ void Model::renderScene() {
 
     painter.setBrush(Qt::green);
 
+    // render door
     Door door = levels.at(currentLevel).doors.at(0);
 
     b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
@@ -120,6 +124,7 @@ void Model::renderScene() {
     QTransform transform;
     transform.scale(1.0, -1.0);
     painter.setTransform(transform);
+    ////
 
     emit renderSceneOnView(scene);
 }
@@ -132,12 +137,14 @@ void Model::onDoorCollisionState() {
     QString doorQuestionText = levels.at(currentLevel).doors.at(0).questionText;
 
     QHash<QString, bool> questionResponses = levels.at(currentLevel).doors.at(0).questionResponses;
+    qDebug() << "onDoorCollisionState";
 
     emit generateQuestionnaire(doorQuestionText, questionResponses);
 }
 
 void Model::isInputCorrect(QString response) {
     Level level = levels.at(currentLevel);
+    qDebug() << "isInputCorrect";
 
     bool isCorrect = level.isCorrectResponse(response, 0);
     QString messagePopUp = level.generateHintResponse(response, 0);

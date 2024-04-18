@@ -5,8 +5,10 @@
 #include <box2d/box2d.h>
 #include <QMap>
 #include "WorldState.h"
+#include "QObject"
 
-class Player {
+class Player : public QObject {
+         Q_OBJECT
 public:
     Player(QPoint location, WorldState* worldState);
 
@@ -32,6 +34,9 @@ public:
 
     // physics update
     void step();
+
+signals:
+    void onDoorContact();
 private:
     b2Body* body;
     Movement moveState = stop;

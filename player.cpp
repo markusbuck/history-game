@@ -16,8 +16,18 @@ Player::Player(QPoint location, WorldState* worldState)
     body->CreateFixture(&fixtureDef);
 
     worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
-        if (began)
+        unsigned long long int data = (unsigned long long int) fixture->GetUserData();
+        if (began){
+            if(data == 3) {
+                qDebug() << data;
+
+                movementStates[Movement::keyLeft] = false;
+                movementStates[Movement::keyRight] = false;
+
+                emit onDoorContact();
+            }
             currentContacts++;
+        }
         else
             currentContacts--;
     });

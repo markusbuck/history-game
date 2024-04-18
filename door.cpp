@@ -18,8 +18,9 @@ Door::Door(QPoint location, Wall wall, QString questionText, WorldState* worldSt
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
-    body->CreateFixture(&fixtureDef);
-
+    fixtureDef.isSensor = true;
+    b2Fixture* fixture = body->CreateFixture(&fixtureDef);
+    fixture->SetUserData((void*)3);
     worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
         if (began)
             currentContacts++;

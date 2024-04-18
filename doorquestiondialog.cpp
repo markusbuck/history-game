@@ -38,11 +38,15 @@ void DoorQuestionDialog::onPlayerCollision(QString questionText, QHash<QString, 
     ui->Response3->setText(responseText.at(2));
     ui->Response4->setText(responseText.at(3));
 
+    qDebug() << "Dialog:OnPlayerCollision";
+
     QDialog::show();
     //displayQuestionnaire(true);
 }
 
 void DoorQuestionDialog::displayQuestionnaire(bool isDisplaying) {
+    qDebug() << "Dialog:displayQuestioinnaire";
+
     if(isDisplaying) {
         QDialog::show();
     }
@@ -68,6 +72,8 @@ void DoorQuestionDialog::onClickedResponse4() {
 }
 
 void DoorQuestionDialog::displayPopUp(bool response, QString answer) {
+    qDebug() << "Dialog:displayPopUp";
+
     QString text = response == true ? "That is correct!\n\n" : "That is not correct!\n\n";
     text += answer;
 
