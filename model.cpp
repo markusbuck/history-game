@@ -47,7 +47,10 @@ Model::Model(QWidget *parent)
     levels.append(level1);
 
     // createCollisionObject(QPoint(0, 100), QPoint(20, 100), 20);
-    createCollisionObject(0., -50., 50., 5.);
+    createCollisionObject(0., -90., 100., 5.);
+    createCollisionObject(90., -85., 20., 5.);
+    createCollisionObject(100., -80., 20., 5.);
+    createCollisionObject(110., -75., 20., 5.);
 
     connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
 
@@ -100,20 +103,15 @@ void Model::worldStep()
 
 void Model::renderScene() {
     scene.fill(Qt::white);
+    QImage background(":/background");
+    background.mirror(false, true);
+    painter.drawImage(QRect(0, -(height()), width(), height()),
+                      background,
+                      QRect(0, 0, 1024, 1024));
 
     painter.setPen(Qt::NoPen);
 
     painter.setBrush(Qt::blue);
-    // b2Vec2 playerPosition = SCALE_FACTOR * player->getTopLeft();
-    // QImage sprite(":/rightWalking0");
-    // sprite.mirror(false, true);
-    // painter.save();
-
-    // painter.drawImage(QRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR),
-    //                   sprite,
-    //                   QRect(0, 6, 100, 100));
-    // painter.restore();
-    //painter.drawRect(playerPosition.x, playerPosition.y, player->width * SCALE_FACTOR, player->height * SCALE_FACTOR);
 
     player->render(&painter);
     // Render the walls
