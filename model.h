@@ -39,6 +39,7 @@ private:
 
     int currentLevel = 0;
     QList<Level> levels;
+    bool isInDialog = false;
 
     QElapsedTimer elapsedTimer;
     qint64 lastFrameTime = 0;
@@ -59,6 +60,7 @@ public slots:
     void onPlayerMoveState(Player::Movement state, bool isDown);
     void onDoorCollisionState();
     void isInputCorrect(QString response);
+    void exitDialog();
 };
 
 #endif // MODEL_H

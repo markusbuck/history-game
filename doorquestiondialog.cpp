@@ -16,11 +16,7 @@ DoorQuestionDialog::DoorQuestionDialog(QWidget *parent)
 
     connect(ui->Popup, &QPushButton::clicked, this, &DoorQuestionDialog::hidePopUp);
 
-    // ui->Popup->setStyleSheet(
-    //     QString("QPushButton {background-color: "
-    //             "rgb(255, 255, 255);} QPushButton:pressed {background-color: "
-    //             "rgb(255,150,150);}"));
-
+    connect(this, &QDialog::rejected, this, &DoorQuestionDialog::onTerminated);
 }
 
 DoorQuestionDialog::~DoorQuestionDialog()
@@ -41,18 +37,6 @@ void DoorQuestionDialog::onPlayerCollision(QString questionText, QHash<QString, 
     qDebug() << "Dialog:OnPlayerCollision";
 
     QDialog::show();
-    //displayQuestionnaire(true);
-}
-
-void DoorQuestionDialog::displayQuestionnaire(bool isDisplaying) {
-    qDebug() << "Dialog:displayQuestioinnaire";
-
-    if(isDisplaying) {
-        QDialog::show();
-    }
-    else {
-        QDialog::hide();
-    }
 }
 
 void DoorQuestionDialog::onClickedResponse1() {
@@ -106,4 +90,10 @@ void DoorQuestionDialog::toggleResponseButtons(bool toggle) {
     ui->Response2->setEnabled(toggle);
     ui->Response3->setEnabled(toggle);
     ui->Response4->setEnabled(toggle);
+}
+
+void DoorQuestionDialog::onTerminated() {
+    hidePopUp();
+
+    emit exitDialog();
 }

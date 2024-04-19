@@ -21,18 +21,19 @@ private:
 
 public slots:
     void onPlayerCollision(QString questionText, QHash<QString, bool> responses);
-    void displayQuestionnaire(bool isDisplaying);
     void onClickedResponse1();
     void onClickedResponse2();
     void onClickedResponse3();
     void onClickedResponse4();
     void displayPopUp(bool response, QString answer);
     void hidePopUp();
+    void onTerminated();
 
 signals:
     void toggleQuestionnaire(bool toggle);
     void onResponseChoice(QString key);
     void sendQuestionText(QString questionText);
+    void exitDialog();
 };
 
 #endif // DOORQUESTIONDIALOG_H
