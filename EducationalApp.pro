@@ -59,6 +59,7 @@ SOURCES += \
     door.cpp \
     doorquestiondialog.cpp \
     level.cpp \
+    level1.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
@@ -119,6 +120,7 @@ HEADERS += \
     door.h \
     doorquestiondialog.h \
     level.h \
+    level1.h \
     mainwindow.h \
     model.h \
     player.h \

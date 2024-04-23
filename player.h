@@ -20,8 +20,6 @@ public:
 
 	int currentContacts = 0;
 
-	void movePlayer(int x, int y);
-
 	void render(QPainter *painter);
 
 	// b2Body methods

@@ -13,8 +13,7 @@
 #include "player.h"
 #include <QElapsedTimer>
 #include "WorldState.h"
-#include "level.h"
-
+#include "level1.h"
 
 class Model : public QWidget
 {
@@ -23,22 +22,12 @@ class Model : public QWidget
 private:
 
     QTimer worldTimer;
-    b2World* world;
-    WorldState worldState;
-    ContactListener *worldContact;
-
-    // void createCollisionObject(QPoint p1, QPoint p2, int width);
-    void createCollisionObject(int x, int y, int w, int h);
-
-    QVector<Wall> collisionObjects;
-    Player* player;
-    float playerSpeed = 0;
 
     QPixmap scene;
     QPainter painter;
 
-    int currentLevel = 0;
-    QList<Level> levels;
+    Level *currentLevel;
+    QList<Level*> levels;
 
     QElapsedTimer elapsedTimer;
     qint64 lastFrameTime = 0;
@@ -57,7 +46,6 @@ signals:
 public slots:
     void worldStep();
     void onPlayerMoveState(Player::Movement state, bool isDown);
-    void onDoorCollisionState();
     void isInputCorrect(QString response);
 };
 

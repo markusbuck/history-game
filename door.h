@@ -10,12 +10,11 @@ class Door {
 private:
 
     QPoint location;
-    Wall hitBox;
     bool isCorrect;
 
     b2Body* body;
 public:
-    Door(QPoint location, Wall wall, QString questionText, WorldState* worldState);
+    Door(QPoint location, QString questionText, WorldState* worldState);
     // Door(QPoint location, QPoint point, QPoint point2, int width, QString questionText, bool isCorrect, b2World* world);
     void insertQuesionResponse(QString text, bool isCorrect);
     void insertHint(QString hint);

@@ -1,54 +1,75 @@
 #include "level.h"
+#include <QDebug>
 
-Level::Level(QVector<Wall> walls, QVector<Door> doors)
-{
-	this->walls = walls;
-	this->doors = doors;
+Level::Level() : collisionObjects() {
+    // world creation
+    b2Vec2 gravity(0.0f, -10.0);
+    b2World *world = new b2World(gravity);
+    ContactListener *worldContact = new ContactListener();
+    world->SetContactListener(worldContact);
+
+    worldState = { world, worldContact };
+
+    // player
+    player = new Player(QPoint(0, 0), &worldState);
 }
 
-bool Level::isCollidingWall()
+//
+
+void Level::createCollisionObject(int x, int y, int width, int height)
 {
-	for (Wall wall : this->walls)
-	{
-		// QPoint p1;
-		// QPoint p2;
-
-		// if(wall.p1.x() < wall.p2.x() || (wall.p1.y() < wall.p2.y())) {
-
-		//     p1 = wall.p1;
-		//     p2 = wall.p2;
-		// }
-
-		// else {
-
-		//     p1 = wall.p2;
-		//     p2 = wall.p1;
-		// }
-
-		// if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x()) {
-		// if(p1.x() - wall.width - this->player.hitBox.width < this->player.location.x() && this->player.location.x() << p2.x() + wall.width + this->player.hitBox.width
-		//     && p1.y() - wall.width - this->player.hitBox.width < this->player.location.y()) {
-
-		//     return true;
-		// }
-
-		// if (p1.GetX() - wallWidth - snakeWidth < snakeHeadX && snakeHeadX < p2.GetX() + wallWidth + snakeWidth
-		//     && p1.GetY() - wallWidth - snakeWidth < snakeHeadY && snakeHeadY < p2.GetY() + wallWidth + snakeWidth)
-		// {
-
-		return false;
-	}
+    Wall newWall(x, y, width, height, &worldState);
+    collisionObjects.push_back(newWall);
 }
 
+//
 
 bool Level::isCorrectResponse(QString response, int doorIndex) {
     Door door = doors.at(doorIndex);
-
     return door.isCorrectResponse(response);
 }
 
 QString Level::generateHintResponse(QString response, int doorIndex) {
     Door door = doors.at(doorIndex);
-
     return door.generateHint(door.isCorrectResponse(response));
+}
+
+void Level::step() {
+    player->step();
+    worldState.world->Step(1.0f / 60.0f, 8, 3);
+}
+
+void Level::render(QPainter *painter) {
+    // player
+    player->render(painter);
+
+    // walls
+    painter->setBrush(Qt::red);
+    for (const Wall& wall : collisionObjects)
+        painter->drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
+
+    // door
+    painter->setBrush(Qt::green);
+    Door door = doors.at(0);
+
+    b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
+    painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
+}
+
+void Level::onDoorCollisionState() {
+    qDebug() << "a";
+    QString doorQuestionText = doors.at(0).questionText;
+
+    QHash<QString, bool> questionResponses = doors.at(0).questionResponses;
+    qDebug() << "onDoorCollisionState";
+
+    emit generateQuestionnaire(doorQuestionText, questionResponses);
+}
+
+void Level::isInputCorrect(QString response) {
+    qDebug() << "isInputCorrect";
+
+    bool isCorrect = isCorrectResponse(response, 0);
+    QString messagePopUp = generateHintResponse(response, 0);
+    emit displayPopUp(isCorrect, messagePopUp);
 }

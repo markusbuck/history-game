@@ -5,8 +5,8 @@
 //     : location(location), questionText(questionText), isCorrect(isCorrect), hitBox(p1, p2, width, world) {
 // }
 
-Door::Door(QPoint location, Wall wall, QString questionText, WorldState* worldState)
-    : location(location), questionText(questionText), isCorrect(isCorrect), hitBox(wall)
+Door::Door(QPoint location, QString questionText, WorldState* worldState)
+    : location(location), questionText(questionText), isCorrect(isCorrect)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
