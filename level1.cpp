@@ -14,5 +14,8 @@ Level1::Level1() : Level() {
     door.insertHint("Hint 4");
     doors.append(door);
 
-    createCollisionObject(0., -50., 50., 5.);
+    createCollisionObject(0., -90., 100., 5.);
+    createCollisionObject(90., -85., 20., 5.);
+    createCollisionObject(100., -80., 20., 5.);
+    createCollisionObject(110., -75., 20., 5.);
 }
