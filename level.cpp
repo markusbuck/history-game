@@ -14,6 +14,11 @@ Level::Level() : collisionObjects() {
     player = new Player(QPoint(0, 0), &worldState);
 }
 
+Level::~Level() {
+    delete worldState.world;
+    delete player;
+}
+
 //
 
 void Level::createCollisionObject(int x, int y, int width, int height)

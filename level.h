@@ -24,6 +24,7 @@ public slots:
     void isInputCorrect(QString response);
 public:
     Level();
+    ~Level();
 
     bool isCollidingWall();
     bool isCollidingDoor();
