@@ -36,6 +36,7 @@ signals:
 protected:
     void paintEvent(QPaintEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;

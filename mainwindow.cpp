@@ -30,8 +30,6 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(&doorQuestionDialog, &DoorQuestionDialog::exitDialog, &model, &Model::exitDialog);
 
     connect(this, &MainWindow::updateDimensions, &model, &Model::updateDimensions);
-    qDebug() << width() << ", " << height();
-    model.updateDimensions(700, 700);
 }
 
 MainWindow::~MainWindow()
@@ -108,4 +106,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent* event) {
             emit setPlayerMoveState(Player::Movement::jump, false);
             break;
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    doorQuestionDialog.close();
 }
