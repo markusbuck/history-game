@@ -12,10 +12,9 @@ Model::Model(QWidget *parent)
 	currentLevel = level1;
 
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
-	connect(&(*currentLevel->player), &Player::onDoorContact, &(*currentLevel), &Level::onDoorCollisionState);
 
-	connect(&(*currentLevel), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
-			{ emit generateQuestionnaire(questionText, responses); });
+    connect(&(*currentLevel), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
+            { emit generateQuestionnaire(questionText, responses); });
 
 	connect(&(*currentLevel), &Level::displayPopUp, this, [this](bool input, QString answer)
 			{ emit displayPopUp(input, answer); });

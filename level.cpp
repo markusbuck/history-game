@@ -15,6 +15,8 @@ Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(),
 
     //
     background.mirror(false, true);
+
+    connect(player, &Player::onDoorContact, this, &Level::onDoorCollisionState);
 }
 
 Level::~Level() {
@@ -82,6 +84,7 @@ void Level::onDoorCollisionState() {
 
     emit generateQuestionnaire(doorQuestionText, questionResponses);
 }
+
 
 void Level::isInputCorrect(QString response) {
     bool isCorrect = isCorrectResponse(response, 0);
