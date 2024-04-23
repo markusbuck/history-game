@@ -1,7 +1,7 @@
 #include "level.h"
 #include <QDebug>
 
-Level::Level() : collisionObjects() {
+Level::Level(QString backgroundPath) : collisionObjects(), background(backgroundPath) {
     // world creation
     b2Vec2 gravity(0.0f, -10.0);
     b2World *world = new b2World(gravity);
@@ -12,6 +12,9 @@ Level::Level() : collisionObjects() {
 
     // player
     player = new Player(QPoint(0, 0), &worldState);
+
+    //
+    background.mirror(false, true);
 }
 
 Level::~Level() {
@@ -45,6 +48,13 @@ void Level::step() {
 
     player->step();
     worldState.world->Step(1.0f / 60.0f, 8, 3);
+}
+
+void Level::renderBackground(QPainter *painter, int width, int height) {
+    // background
+    painter->drawImage(QRect(0, -height, width, height),
+                       background,
+                       QRect(0, 0, 1024, 1024));
 }
 
 void Level::render(QPainter *painter) {

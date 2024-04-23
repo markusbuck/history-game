@@ -1,6 +1,6 @@
 #include "level1.h"
 
-Level1::Level1() : Level() {
+Level1::Level1(QString background) : Level(background) {
     // Create levels question
     Door door(QPoint(40, -83), "George Washington was born in...", &worldState);
     door.insertQuesionResponse("March 11, 1690", false);

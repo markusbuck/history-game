@@ -17,6 +17,7 @@ protected:
     void createCollisionObject(int x, int y, int width, int height);
     QVector<Wall> collisionObjects;
     bool isInDialog = false;
+    QImage background;
 signals:
     void generateQuestionnaire(QString questionText, QHash<QString, bool> responses);
     void displayPopUp(bool input, QString answer);
@@ -25,7 +26,7 @@ public slots:
     void isInputCorrect(QString response);
     void exitDialog();
 public:
-    Level();
+    Level(QString backgroundPath);
     ~Level();
 
     bool isCollidingWall();
@@ -35,6 +36,7 @@ public:
     QString generateHintResponse(QString response,int doorIndex);
 
     void step();
+    void renderBackground(QPainter *painter, int width, int height);
     void render(QPainter *painter);
 
     QVector<Door> doors;

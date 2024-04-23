@@ -13,7 +13,8 @@ Player::Player(QPoint location, WorldState* worldState)
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
-    body->CreateFixture(&fixtureDef);
+    b2Fixture* fixture = body->CreateFixture(&fixtureDef);
+    fixture->SetRestitution(0);
     worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
         unsigned long long int data = (unsigned long long int) fixture->GetUserData();
         if (began){

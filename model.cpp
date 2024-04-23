@@ -5,7 +5,7 @@
 Model::Model(QWidget *parent)
 	: QWidget(parent), scene(width(), height()), painter(&scene), elapsedTimer()
 {
-	Level1 *level1 = new Level1();
+    Level1 *level1 = new Level1(":/background");
 	levels.append(level1);
 	currentLevel = level1;
 
@@ -59,11 +59,8 @@ void Model::worldStep()
 void Model::renderScene()
 {
 	scene.fill(Qt::white);
-	QImage background(":/background");
-	background.mirror(false, true);
-	painter.drawImage(QRect(0, -(height()), width(), height()),
-					  background,
-					  QRect(0, 0, 1024, 1024));
+
+    currentLevel->renderBackground(&painter, scene.width(), scene.height());
 
 	painter.setPen(Qt::NoPen);
 	painter.setBrush(Qt::blue);
