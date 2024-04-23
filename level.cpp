@@ -48,7 +48,7 @@ void Level::step() {
     if (!worldState.world || isInDialog)
         return;
 
-    player->step();
+    player->step(1. / 60.);
     worldState.world->Step(1.0f / 60.0f, 8, 3);
 }
 

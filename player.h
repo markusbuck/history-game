@@ -41,7 +41,7 @@ public:
 	QMap<Movement, bool> movementStates;
 
 	// physics update
-	void step();
+    void step(float);
 
 signals:
 	void onDoorContact();
@@ -50,6 +50,7 @@ private:
 	spriteSheet sprite;
 	b2Body *body;
 	Movement moveState = stop;
+    float elapsedSinceLastFrame;
 };
 
 #endif // PLAYER_H

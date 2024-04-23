@@ -23,7 +23,7 @@ Player::Player(QPoint location, WorldState* worldState)
     body->CreateFixture(&fixtureDef);
 
     dynamicBox.SetAsBox(1, 0.5, b2Vec2(0, -height / 2.0), 0);
-    fixtureDef.isSensor = false;
+    fixtureDef.isSensor = true;
     b2Fixture* foot = body->CreateFixture(&fixtureDef);
     foot->SetUserData( (void*)2 );
 
@@ -80,8 +80,9 @@ void Player::render(QPainter *painter){
 
 //
 
-void Player::step() {
+void Player::step(float dt) {
     b2Vec2 vel = getVelocity();
+    elapsedSinceLastFrame += dt;
 
     float desiredVel = 0;
     float jumpVel = 0;
@@ -89,16 +90,18 @@ void Player::step() {
     if (movementStates[Movement::keyLeft]){
         desiredVel += -walkSpeed;
         sprite.mirror(true, true);
-        sprite.incrementIndex();
     }
     if (movementStates[Movement::keyRight]){
         desiredVel += walkSpeed;
         sprite.mirror(false, true);
-        sprite.incrementIndex();
     }
 
     if(desiredVel == 0)
         sprite.setIndex(0);
+    else if (elapsedSinceLastFrame > 0.08) {
+        sprite.incrementIndex();
+        elapsedSinceLastFrame = 0;
+    }
 
     if (movementStates[Movement::jump] && currentContacts >= 1) {
         jumpVel = getMass() * jumpPower;
