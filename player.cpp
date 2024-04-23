@@ -9,6 +9,7 @@ Player::Player(QPoint location, WorldState* worldState)
     bodyDef.bullet = true;
     bodyDef.linearDamping = 1.;
     bodyDef.gravityScale = 6;
+    bodyDef.allowSleep = false;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
     body = worldState->world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
@@ -17,22 +18,31 @@ Player::Player(QPoint location, WorldState* worldState)
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
-    b2Fixture* fixture = body->CreateFixture(&fixtureDef);
-    fixture->SetRestitution(0);
-    worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
-        unsigned long long int data = (unsigned long long int) fixture->GetUserData();
-        if (began){
-            if(data == 3) {
-                qDebug() << data;
+    fixtureDef.restitution = 0;
+    fixtureDef.friction = 0;
+    body->CreateFixture(&fixtureDef);
 
+    dynamicBox.SetAsBox(1, 0.5, b2Vec2(0, -height / 2.0), 0);
+    fixtureDef.isSensor = false;
+    b2Fixture* foot = body->CreateFixture(&fixtureDef);
+    foot->SetUserData( (void*)2 );
+
+    worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *contactFixture, b2Fixture *thisFixture) {
+        unsigned long long int contactData = (unsigned long long int) contactFixture->GetUserData();
+        unsigned long long int sensorData = (unsigned long long int) thisFixture->GetUserData();
+        if (began){
+            if(contactData == 3) {
                 movementStates[Movement::keyLeft] = false;
                 movementStates[Movement::keyRight] = false;
 
                 emit onDoorContact();
             }
-            currentContacts++;
+
+            // sensorData == 2 is the foot sensor to detect when on the ground
+            if (sensorData == 2)
+                currentContacts++;
         }
-        else
+        else if (sensorData == 2)
             currentContacts--;
     });
 }

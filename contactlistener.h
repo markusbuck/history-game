@@ -10,7 +10,7 @@ class ContactListener : public b2ContactListener
 public:
     ContactListener();
 
-    using Callback = std::function<void(bool began, b2Fixture*)>;
+    using Callback = std::function<void(bool began, b2Fixture*, b2Fixture*)>;
     void BeginContact(b2Contact* contact) override;
     void EndContact(b2Contact* contact) override;
 

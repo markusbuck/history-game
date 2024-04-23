@@ -21,12 +21,12 @@ Door::Door(QPoint location, QString questionText, WorldState* worldState)
     fixtureDef.isSensor = true;
     b2Fixture* fixture = body->CreateFixture(&fixtureDef);
     fixture->SetUserData((void*)3);
-    worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
-        if (began)
-            currentContacts++;
-        else
-            currentContacts--;
-    });
+    // worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
+    //     if (began)
+    //         currentContacts++;
+    //     else
+    //         currentContacts--;
+    // });
 
 }
 
