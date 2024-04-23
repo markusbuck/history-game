@@ -141,4 +141,5 @@ DISTFILES += \
     Box2D/CMakeLists.txt
 
 RESOURCES += \
+    backgrounds.qrc \
     sprites.qrc

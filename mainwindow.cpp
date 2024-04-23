@@ -11,7 +11,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
 {
     ui->setupUi(this);
 
-    doorQuestionDialog.setModal(true);
+    //doorQuestionDialog.setModal(true);
     //doorQuestionDialog.show();
     //doorQuestionDialog.hide();
 
@@ -25,7 +25,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
 
     connect(&doorQuestionDialog, &DoorQuestionDialog::sendQuestionText, &model, &Model::isInputCorrect);
 
-    connect(&model, &Model::displayPopUp, &doorQuestionDialog, &DoorQuestionDialog::displayPopUp);    
+    connect(&model, &Model::displayPopUp, &doorQuestionDialog, &DoorQuestionDialog::displayPopUp);
+
+    connect(&doorQuestionDialog, &DoorQuestionDialog::exitDialog, &model, &Model::exitDialog);
 }
 
 MainWindow::~MainWindow()

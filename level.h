@@ -16,12 +16,14 @@ protected:
     WorldState worldState;
     void createCollisionObject(int x, int y, int width, int height);
     QVector<Wall> collisionObjects;
+    bool isInDialog = false;
 signals:
     void generateQuestionnaire(QString questionText, QHash<QString, bool> responses);
     void displayPopUp(bool input, QString answer);
 public slots:
     void onDoorCollisionState();
     void isInputCorrect(QString response);
+    void exitDialog();
 public:
     Level();
     ~Level();

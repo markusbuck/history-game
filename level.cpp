@@ -40,6 +40,9 @@ QString Level::generateHintResponse(QString response, int doorIndex) {
 }
 
 void Level::step() {
+    if (!worldState.world || isInDialog)
+        return;
+
     player->step();
     worldState.world->Step(1.0f / 60.0f, 8, 3);
 }
@@ -62,7 +65,7 @@ void Level::render(QPainter *painter) {
 }
 
 void Level::onDoorCollisionState() {
-    qDebug() << "a";
+    isInDialog = true;
     QString doorQuestionText = doors.at(0).questionText;
 
     QHash<QString, bool> questionResponses = doors.at(0).questionResponses;
@@ -72,9 +75,14 @@ void Level::onDoorCollisionState() {
 }
 
 void Level::isInputCorrect(QString response) {
-    qDebug() << "isInputCorrect";
-
     bool isCorrect = isCorrectResponse(response, 0);
     QString messagePopUp = generateHintResponse(response, 0);
+
+    qDebug() << "isInputCorrect" << isCorrect;
+
     emit displayPopUp(isCorrect, messagePopUp);
+}
+
+void Level::exitDialog() {
+    isInDialog = false;
 }

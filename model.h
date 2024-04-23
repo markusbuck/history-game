@@ -47,6 +47,7 @@ public slots:
     void worldStep();
     void onPlayerMoveState(Player::Movement state, bool isDown);
     void isInputCorrect(QString response);
+    void exitDialog();
 };
 
 #endif // MODEL_H
