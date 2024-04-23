@@ -12,7 +12,7 @@ Player::Player(QPoint location, WorldState* worldState)
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
     body = worldState->world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(width / 2.0 - .1, height / 2.0 - .1); // half sizes, 4w x 12h
+    dynamicBox.SetAsBox(5 / 2.0 - .1, height/ 2.0 - .1); // half sizes, 4w x 12h
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1.0f;

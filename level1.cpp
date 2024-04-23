@@ -18,4 +18,5 @@ Level1::Level1(QString background) : Level(background, QPoint(10, -60)) {
     createCollisionObject(85., -106., 20., 5.);
     createCollisionObject(95., -101., 20., 5.);
     createCollisionObject(105., -96., 20., 5.);
+    createCollisionObject(30., -85., 50., 5.);
 }
