@@ -1,7 +1,7 @@
 #include "level.h"
 #include <QDebug>
 
-Level::Level(QString backgroundPath) : collisionObjects(), background(backgroundPath) {
+Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(), background(backgroundPath) {
     // world creation
     b2Vec2 gravity(0.0f, -10.0);
     b2World *world = new b2World(gravity);
@@ -11,7 +11,7 @@ Level::Level(QString backgroundPath) : collisionObjects(), background(background
     worldState = { world, worldContact };
 
     // player
-    player = new Player(QPoint(0, 0), &worldState);
+    player = new Player(spawnPosition, &worldState);
 
     //
     background.mirror(false, true);

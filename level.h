@@ -26,7 +26,7 @@ public slots:
     void isInputCorrect(QString response);
     void exitDialog();
 public:
-    Level(QString backgroundPath);
+    Level(QString backgroundPath, QPoint spawnPosition);
     ~Level();
 
     bool isCollidingWall();

@@ -5,6 +5,10 @@ Player::Player(QPoint location, WorldState* worldState)
     : width(16), height(16), movementStates(), sprite(":/right.png", 100, 100) {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
+    bodyDef.fixedRotation = true;
+    bodyDef.bullet = true;
+    bodyDef.linearDamping = 1.;
+    bodyDef.gravityScale = 6;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
     body = worldState->world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;

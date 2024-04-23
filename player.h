@@ -15,8 +15,8 @@ public:
 	Player(QPoint location, WorldState *worldState);
 
 	const int width, height;
-    float walkSpeed = 15.0;
-    float jumpPower = 10.0;
+    float walkSpeed = 25.0;
+    float jumpPower = 40.0;
 
 	int currentContacts = 0;
 
