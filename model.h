@@ -35,6 +35,8 @@ private:
 
     void renderScene();
 
+    b2Vec2 windowDimensions;
+
 public:
     Model(QWidget *parent = nullptr);
     ~Model();
@@ -48,6 +50,7 @@ public slots:
     void onPlayerMoveState(Player::Movement state, bool isDown);
     void isInputCorrect(QString response);
     void exitDialog();
+    void updateDimensions(int width, int height);
 };
 
 #endif // MODEL_H

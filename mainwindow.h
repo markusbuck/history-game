@@ -31,9 +31,11 @@ public slots:
 signals:
     void setPlayerMoveState(Player::Movement state, bool isDown);
     void doorCollision();
+    void updateDimensions(int width, int height);
 
 protected:
     void paintEvent(QPaintEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
     Ui::MainWindow *ui;

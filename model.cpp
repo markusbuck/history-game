@@ -3,8 +3,10 @@
 #include "contactlistener.h"
 
 Model::Model(QWidget *parent)
-	: QWidget(parent), scene(width(), height()), painter(&scene), elapsedTimer()
+    : QWidget(parent), scene(640, 480), painter(), elapsedTimer(), windowDimensions(0., 0.)
 {
+    painter.begin(&scene);
+
     Level1 *level1 = new Level1(":/background");
 	levels.append(level1);
 	currentLevel = level1;
@@ -26,6 +28,13 @@ Model::Model(QWidget *parent)
 
 Model::~Model()
 {
+}
+
+void Model::updateDimensions(int width, int height) {
+    painter.end();
+    windowDimensions = b2Vec2(width, height);
+    scene = QPixmap(width, height);
+    painter.begin(&scene);
 }
 
 void Model::isInputCorrect(QString response)
@@ -60,17 +69,19 @@ void Model::renderScene()
 {
 	scene.fill(Qt::white);
 
-    currentLevel->renderBackground(&painter, scene.width(), scene.height());
+    currentLevel->renderBackground(&painter);
 
-	painter.setPen(Qt::NoPen);
-	painter.setBrush(Qt::blue);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::blue);
 
-	currentLevel->render(&painter);
+    currentLevel->render(&painter);
 
 	// fix scale
-	QTransform transform;
-	transform.scale(1.0, -1.0);
-	painter.setTransform(transform);
+    float max = (float)qMin(scene.width(), scene.height());
+    float ratio = max / 600.;
+    QTransform transform;
+    transform.scale(1.0 * ratio, -1.0 * ratio);
+    painter.setTransform(transform);
 
 	emit renderSceneOnView(scene);
 }

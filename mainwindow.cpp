@@ -28,6 +28,10 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(&model, &Model::displayPopUp, &doorQuestionDialog, &DoorQuestionDialog::displayPopUp);
 
     connect(&doorQuestionDialog, &DoorQuestionDialog::exitDialog, &model, &Model::exitDialog);
+
+    connect(this, &MainWindow::updateDimensions, &model, &Model::updateDimensions);
+    qDebug() << width() << ", " << height();
+    model.updateDimensions(700, 700);
 }
 
 MainWindow::~MainWindow()
@@ -39,6 +43,12 @@ void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.drawPixmap(0, 0, scenePixmap); // Draw the stored QPixmap
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event) {
+    QSize size = event->size();
+    emit updateDimensions(size.width(), size.height());
+    QMainWindow::resizeEvent(event);
 }
 
 void MainWindow::onSceneRender(QPixmap& scene)

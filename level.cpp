@@ -50,9 +50,8 @@ void Level::step() {
     worldState.world->Step(1.0f / 60.0f, 8, 3);
 }
 
-void Level::renderBackground(QPainter *painter, int width, int height) {
-    // background
-    painter->drawImage(QRect(0, -height, width, height),
+void Level::renderBackground(QPainter *painter) {
+    painter->drawImage(QRect(0, -600, 600, 600),
                        background,
                        QRect(0, 0, 1024, 1024));
 }

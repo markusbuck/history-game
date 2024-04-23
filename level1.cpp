@@ -2,7 +2,7 @@
 
 Level1::Level1(QString background) : Level(background) {
     // Create levels question
-    Door door(QPoint(40, -83), "George Washington was born in...", &worldState);
+    Door door(QPoint(40, -106), "George Washington was born in...", &worldState);
     door.insertQuesionResponse("March 11, 1690", false);
     door.insertQuesionResponse("April 20, 1215", false);
     door.insertQuesionResponse("February 22, 1732", true);
@@ -14,8 +14,8 @@ Level1::Level1(QString background) : Level(background) {
     door.insertHint("Hint 4");
     doors.append(door);
 
-    createCollisionObject(0., -90., 100., 5.);
-    createCollisionObject(90., -85., 20., 5.);
-    createCollisionObject(100., -80., 20., 5.);
-    createCollisionObject(110., -75., 20., 5.);
+    createCollisionObject(0., -111., 100., 5.);
+    createCollisionObject(85., -106., 20., 5.);
+    createCollisionObject(95., -101., 20., 5.);
+    createCollisionObject(105., -96., 20., 5.);
 }

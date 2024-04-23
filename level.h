@@ -36,7 +36,7 @@ public:
     QString generateHintResponse(QString response,int doorIndex);
 
     void step();
-    void renderBackground(QPainter *painter, int width, int height);
+    void renderBackground(QPainter *painter);
     void render(QPainter *painter);
 
     QVector<Door> doors;
