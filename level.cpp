@@ -67,7 +67,7 @@ void Level::render(QPainter *painter) {
     // walls
     painter->setBrush(Qt::red);
     // for (const Wall& wall : collisionObjects)
-    //     painter->drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
+        //painter->drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
 
     // door
     painter->setBrush(Qt::green);

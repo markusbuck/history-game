@@ -19,12 +19,12 @@ Level1::Level1(QString background) : Level(background, QPoint(2, -80)) {
     doors.append(door);
 
     createCollisionObject(0., -111., 100., 5.);
-    createCollisionObject(0., -111., 5., 115.);
+    createCollisionObject(-1., -111., 1., 115.);
 
     createCollisionObject(90., -109., 40., 10.);
 
     createCollisionObject(30., -90., 50., 2.);
-    //createCollisionObject(30., -90., 5., 50.);
+
     createCollisionObject(30., -87., 20., 10.);
 
     createCollisionObject(60., -69., 20., 5.);
@@ -34,7 +34,7 @@ Level1::Level1(QString background) : Level(background, QPoint(2, -80)) {
     createCollisionObject(105., -48., 20., 5.);
     createCollisionObject(30., -35., 60., 5.);
 
-    createCollisionObject(115., -111., 5., 115.);
+    createCollisionObject(120., -111., 1., 115.);
 }
 
 void Level1::renderCustom(QPainter *painter) {

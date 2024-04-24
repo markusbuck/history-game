@@ -3,6 +3,8 @@
 #include "contactlistener.h"
 #include "level1.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 Model::Model(QWidget *parent)
     : QWidget(parent), scene(640, 480), painter(), elapsedTimer(), windowDimensions(0., 0.)
@@ -16,6 +18,14 @@ Model::Model(QWidget *parent)
     Level2 *level2 = new Level2(":/level2");
     levels.append(level2);
     setupLevel(level2);
+
+    Level3 *level3 = new Level3(":/level3");
+    levels.append(level3);
+    setupLevel(level3);
+
+    Level4 *level4 = new Level4(":/level4");
+    levels.append(level4);
+    setupLevel(level4);
 
     currentLevel = level1;
 
