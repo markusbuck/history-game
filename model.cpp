@@ -27,7 +27,7 @@ Model::Model(QWidget *parent)
     levels.append(level4);
     setupLevel(level4);
 
-    currentLevel = level4;
+    currentLevel = level1;
 
     //emit showInitialContextDialogue();
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
