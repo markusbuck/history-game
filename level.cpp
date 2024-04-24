@@ -59,6 +59,8 @@ void Level::renderBackground(QPainter *painter) {
 }
 
 void Level::render(QPainter *painter) {
+    renderCustom(painter);
+
     // player
     player->render(painter);
 

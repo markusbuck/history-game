@@ -38,6 +38,7 @@ public:
     void step();
     void renderBackground(QPainter *painter);
     void render(QPainter *painter);
+    virtual void renderCustom(QPainter *painter) = 0;
 
     QVector<Door> doors;
     Player *player;

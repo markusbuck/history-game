@@ -20,3 +20,7 @@ Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     createCollisionObject(105., -96., 20., 5.);
     createCollisionObject(30., -85., 50., 5.);
 }
+
+void Level2::renderCustom(QPainter *painter) {
+
+}

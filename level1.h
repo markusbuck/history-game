@@ -7,6 +7,7 @@ class Level1 : public Level
 {
 public:
     Level1(QString background);
+    void renderCustom(QPainter *painter) override;
 };
 
 #endif // LEVEL1_H
