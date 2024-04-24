@@ -7,6 +7,9 @@
 #include "WorldState.h"
 #include "QObject"
 #include "spritesheet.h"
+#include <QSoundEffect>
+#include <QUrl>
+
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
  * CS 3505 Assignment 9: Educational App
@@ -107,6 +110,7 @@ private:
 	b2Body *body;
 	Movement moveState = stop;
     float elapsedSinceLastFrame;
+    QSoundEffect jumpSound;
 };
 
 #endif // PLAYER_H
