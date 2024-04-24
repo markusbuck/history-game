@@ -8,7 +8,7 @@ Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     door.insertQuesionResponse("John Burgoyne", true);
     door.insertQuesionResponse("William Howe", false);
     door.insertQuesionResponse("Henry Clinton", false);
-
+    context = "Henery Clinton is a commander.";
     door.insertHint("Henery Clinton acted as\n commander in chief\n in America.");
     door.insertHint("William Howe acted as\n commander in chief\n in America.");
     door.insertHint("Charles Cornwallis acted as\n commander in chief\n in America.");

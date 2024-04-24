@@ -8,6 +8,9 @@ Level1::Level1(QString background) : Level(background, QPoint(2, -80)) {
     door.insertQuesionResponse("Lexington and Concord", true);
     door.insertQuesionResponse("Quebec", false);
 
+    context = "George Washington was the first president.";
+
+
     door.insertHint("It is along\n the East coast of\n America.");
     door.insertHint("The battle occured\n in what is now \ncalled the United States.");
     door.insertHint("It is in the\n Northern reigion of\n the 13 colonies.");

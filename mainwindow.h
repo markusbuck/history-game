@@ -8,6 +8,7 @@
 #include "model.h"
 #include "player.h"
 #include "doorquestiondialog.h"
+#include "startleveldialogue.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,6 +33,7 @@ signals:
     void setPlayerMoveState(Player::Movement state, bool isDown);
     void doorCollision();
     void updateDimensions(int width, int height);
+    void showDialogue();
 
 protected:
     void paintEvent(QPaintEvent* event) override;
@@ -43,7 +45,7 @@ private:
     Model& model;
     QPixmap scenePixmap;
     DoorQuestionDialog doorQuestionDialog;
-
+    StartLevelDialogue startLevelDialogue;
     QTransform transform;
 };
 

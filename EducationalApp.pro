@@ -66,6 +66,7 @@ SOURCES += \
     model.cpp \
     player.cpp \
     spritesheet.cpp \
+    startleveldialogue.cpp \
     wall.cpp
 
 HEADERS += \
@@ -127,11 +128,13 @@ HEADERS += \
     model.h \
     player.h \
     spritesheet.h \
+    startleveldialogue.h \
     wall.h
 
 FORMS += \
     doorquestiondialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    startleveldialogue.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

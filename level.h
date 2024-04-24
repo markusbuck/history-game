@@ -42,6 +42,8 @@ public:
 
     QVector<Door> doors;
     Player *player;
+    QString context;
+
 };
 
 #endif // LEVEL_H

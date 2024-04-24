@@ -48,12 +48,17 @@ signals:
     void renderSceneOnView(QPixmap& scene);
     void generateQuestionnaire(QString questionText, QHash<QString, bool> responses);
     void displayPopUp(bool input, QString answer);
+    void sendCurrentContext(QString context);
+    void showContextDialogue();
+
 public slots:
     void worldStep();
     void onPlayerMoveState(Player::Movement state, bool isDown);
     void isInputCorrect(QString response);
     void exitDialog();
     void updateDimensions(int width, int height);
+    void getCurrentContext();
+
 };
 
 #endif // MODEL_H

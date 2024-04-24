@@ -32,6 +32,8 @@ Model::~Model()
 }
 
 void Model::setupLevel(Level *level) {
+    emit showContextDialogue();
+    qDebug() << "This is being executed";
     connect(&(*level), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
             { emit generateQuestionnaire(questionText, responses); });
 
@@ -49,6 +51,10 @@ void Model::updateDimensions(int width, int height) {
 void Model::isInputCorrect(QString response)
 {
 	currentLevel->isInputCorrect(response);
+}
+
+void Model::getCurrentContext(){
+    emit sendCurrentContext(currentLevel->context);
 }
 
 void Model::exitDialog() {
