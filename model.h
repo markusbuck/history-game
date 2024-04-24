@@ -13,7 +13,7 @@
 #include "player.h"
 #include <QElapsedTimer>
 #include "WorldState.h"
-#include "level1.h"
+#include "level.h"
 
 class Model : public QWidget
 {
@@ -28,6 +28,7 @@ private:
 
     Level *currentLevel;
     QList<Level*> levels;
+    int currentLevelIndex = 0;
 
     QElapsedTimer elapsedTimer;
     qint64 lastFrameTime = 0;

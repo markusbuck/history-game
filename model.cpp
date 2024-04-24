@@ -1,6 +1,8 @@
 // model.cpp
 #include "model.h"
 #include "contactlistener.h"
+#include "level1.h"
+#include "level2.h"
 
 Model::Model(QWidget *parent)
     : QWidget(parent), scene(640, 480), painter(), elapsedTimer(), windowDimensions(0., 0.)
@@ -9,6 +11,10 @@ Model::Model(QWidget *parent)
 
     Level1 *level1 = new Level1(":/background");
 	levels.append(level1);
+
+    Level2 *level2 = new Level2(":/background");
+    levels.append(level2);
+
 	currentLevel = level1;
 
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
@@ -42,7 +48,11 @@ void Model::isInputCorrect(QString response)
 }
 
 void Model::exitDialog() {
+    // go to next level
     currentLevel->exitDialog();
+
+    currentLevelIndex++;
+    currentLevel = levels.at(currentLevelIndex);
 }
 
 void Model::worldStep()
