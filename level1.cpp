@@ -8,10 +8,11 @@ Level1::Level1(QString background) : Level(background, QPoint(2, -80)) {
     door.insertQuesionResponse("Lexington and Concord", true);
     door.insertQuesionResponse("Quebec", false);
 
-    door.insertHint("George Washington had\n no biological\n children.");
-    door.insertHint("George Washingtons\n dentures were\n not made of wood.");
-    door.insertHint("George Washington loved\n to party.");
-    door.insertHint("Hint 4");
+    door.insertHint("It is along\n the East coast of\n America.");
+    door.insertHint("The battle occured\n in what is now \ncalled the United States.");
+    door.insertHint("It is in the\n Northern reigion of\n the 13 colonies.");
+    door.insertHint("This battle occured\n in Massachusetts.");
+
     doors.append(door);
 
     createCollisionObject(0., -111., 100., 5.);
