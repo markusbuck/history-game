@@ -72,7 +72,7 @@ void Level::render(QPainter *painter) {
     Door door = doors.at(0);
 
     b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
-    //painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
+    painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
 }
 
 void Level::onDoorCollisionState() {

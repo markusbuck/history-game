@@ -2,15 +2,15 @@
 
 Level1::Level1(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-    Door door(QPoint(30, -30), "George Washington was born in...", &worldState);
-    door.insertQuesionResponse("March 11, 1690", false);
-    door.insertQuesionResponse("April 20, 1215", false);
-    door.insertQuesionResponse("February 22, 1732", true);
-    door.insertQuesionResponse("December 9, 2025", false);
+    Door door(QPoint(30, -30), "Where did the first battle of the Revolutionary war take place?", &worldState);
+    door.insertQuesionResponse("Boston", false);
+    door.insertQuesionResponse("London", false);
+    door.insertQuesionResponse("Lexington and Concord", true);
+    door.insertQuesionResponse("Quebec", false);
 
-    door.insertHint("George Washington had no biological children.");
-    door.insertHint("George Washingtons dentures\n were not made of wood.");
-    door.insertHint("George Washington loved to party.");
+    door.insertHint("George Washington had\n no biological\n children.");
+    door.insertHint("George Washingtons\n dentures were\n not made of wood.");
+    door.insertHint("George Washington loved\n to party.");
     door.insertHint("Hint 4");
     doors.append(door);
 

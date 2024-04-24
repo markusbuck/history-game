@@ -8,6 +8,7 @@ DoorQuestionDialog::DoorQuestionDialog(QWidget *parent)
     ui->setupUi(this);
 
     ui->Popup->hide();
+    setWindowFlags( Qt::CustomizeWindowHint );
 
     connect(ui->Response1, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse1);
     connect(ui->Response2, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse2);
@@ -58,8 +59,10 @@ void DoorQuestionDialog::onClickedResponse4() {
 void DoorQuestionDialog::displayPopUp(bool response, QString answer) {
     qDebug() << "Dialog:displayPopUp";
 
-    QString text = response == true ? "That is correct!\n\n" : "That is not correct!\n\n";
+    QString text = response == true ? "That is correct!\n" : "That is not correct!\n";
     text += answer;
+
+    doCloseAfterPopup = response;
 
     toggleResponseButtons(false);
 
@@ -83,6 +86,11 @@ void DoorQuestionDialog::displayPopUp(bool response, QString answer) {
 void DoorQuestionDialog::hidePopUp() {
     ui->Popup->hide();
     toggleResponseButtons(true);
+
+    if (doCloseAfterPopup) {
+        doCloseAfterPopup = false;
+        emit exitDialog();
+    }
 }
 
 void DoorQuestionDialog::toggleResponseButtons(bool toggle) {

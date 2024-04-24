@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::DoorQuestionDialog *ui;
+    bool doCloseAfterPopup = false;
 
 public slots:
     void onPlayerCollision(QString questionText, QHash<QString, bool> responses);
