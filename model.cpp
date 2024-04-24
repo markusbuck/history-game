@@ -13,11 +13,11 @@ Model::Model(QWidget *parent)
 	levels.append(level1);
     setupLevel(level1);
 
-    Level2 *level2 = new Level2(":/background");
+    Level2 *level2 = new Level2(":/level2");
     levels.append(level2);
     setupLevel(level2);
 
-	currentLevel = level1;
+    currentLevel = level1;
 
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
 
