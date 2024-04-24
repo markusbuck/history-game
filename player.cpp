@@ -8,7 +8,7 @@ Player::Player(QPoint location, WorldState* worldState)
     bodyDef.fixedRotation = true;
     bodyDef.bullet = true;
     bodyDef.linearDamping = 1.;
-    bodyDef.gravityScale = 6;
+    bodyDef.gravityScale = 15;
     bodyDef.allowSleep = false;
     bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
     body = worldState->world->CreateBody(&bodyDef);
@@ -22,7 +22,7 @@ Player::Player(QPoint location, WorldState* worldState)
     fixtureDef.friction = 0;
     body->CreateFixture(&fixtureDef);
 
-    dynamicBox.SetAsBox(1, 0.5, b2Vec2(0, -height / 2.0), 0);
+    dynamicBox.SetAsBox(1, 0.1, b2Vec2(0, -height / 2.0 + 0.05), 0);
     fixtureDef.isSensor = true;
     b2Fixture* foot = body->CreateFixture(&fixtureDef);
     foot->SetUserData( (void*)2 );
@@ -49,6 +49,10 @@ Player::Player(QPoint location, WorldState* worldState)
 
 void Player::applyImpulse(b2Vec2 impulse, b2Vec2 position) {
     body->ApplyLinearImpulse(impulse, position, true);
+}
+
+void Player::applyForce(b2Vec2 force) {
+    body->ApplyForceToCenter(force, true);
 }
 
 b2Vec2 Player::getVelocity() {
@@ -104,8 +108,13 @@ void Player::step(float dt) {
     }
 
     if (movementStates[Movement::jump] && currentContacts >= 1) {
-        jumpVel = getMass() * jumpPower;
+        jumpVel = getMass() * jumpPower; // feels slow, especially when reaching the peak
         movementStates[Movement::jump] = false;
+    }
+
+    if (vel.y < 0) {
+        float gravityScale = 1.0f + (-vel.y / 5.0f);
+        applyForce(b2Vec2(0, -gravityScale * getMass() * 25.0f));
     }
 
     float velChange = desiredVel - vel.x;

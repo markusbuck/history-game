@@ -16,7 +16,7 @@ public:
 
 	const int width, height;
     float walkSpeed = 35.0;
-    float jumpPower = 50.0;
+    float jumpPower = 75.0;
 
 	int currentContacts = 0;
 
@@ -25,6 +25,7 @@ public:
 	// b2Body methods
 	b2Vec2 getVelocity();
 	void applyImpulse(b2Vec2 impulse, b2Vec2 position);
+    void applyForce(b2Vec2 force);
 	float getMass();
 	b2Vec2 getCenter();
 	b2Vec2 getTopLeft();
