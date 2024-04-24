@@ -61,6 +61,8 @@ SOURCES += \
     level.cpp \
     level1.cpp \
     level2.cpp \
+    level3.cpp \
+    level4.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
@@ -124,6 +126,8 @@ HEADERS += \
     level.h \
     level1.h \
     level2.h \
+    level3.h \
+    level4.h \
     mainwindow.h \
     model.h \
     player.h \

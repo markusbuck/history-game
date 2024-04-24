@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>background.png</file>
+        <file>level3.png</file>
         <file>level1.png</file>
         <file>level2.png</file>
+        <file>level4.png</file>
     </qresource>
 </RCC>

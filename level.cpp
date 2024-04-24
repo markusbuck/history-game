@@ -66,15 +66,15 @@ void Level::render(QPainter *painter) {
 
     // walls
     painter->setBrush(Qt::red);
-    // for (const Wall& wall : collisionObjects)
-    //     painter->drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
+    for (const Wall& wall : collisionObjects)
+        painter->drawRect(wall.x * SCALE_FACTOR, wall.y * SCALE_FACTOR, wall.width * SCALE_FACTOR, wall.height * SCALE_FACTOR);
 
     // door
     painter->setBrush(Qt::green);
     Door door = doors.at(0);
 
     b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
-    //painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
+    painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
 }
 
 void Level::onDoorCollisionState() {
