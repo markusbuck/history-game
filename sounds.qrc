@@ -1,3 +1,6 @@
 <RCC>
-    <qresource prefix="/"/>
+    <qresource prefix="/">
+        <file>eaglescream.mp3</file>
+        <file>eaglescream.wav</file>
+    </qresource>
 </RCC>

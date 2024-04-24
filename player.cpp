@@ -1,8 +1,12 @@
 #include "player.h"
 #include <QDebug>
+#include <QFile>
 
 Player::Player(QPoint location, WorldState* worldState)
-    : width(16), height(16), movementStates(), sprite(":/right.png", 100, 100) {
+    : width(16), height(16), movementStates(), sprite(":/right.png", 100, 100), jumpSound() {
+
+    jumpSound.setSource(QUrl("qrc:/eaglescream.wav"));
+    jumpSound.setVolume(1.f);
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
@@ -110,6 +114,7 @@ void Player::step(float dt) {
     if (movementStates[Movement::jump] && currentContacts >= 1) {
         jumpVel = getMass() * jumpPower; // feels slow, especially when reaching the peak
         movementStates[Movement::jump] = false;
+        jumpSound.play();
     }
 
     if (vel.y < 0) {
