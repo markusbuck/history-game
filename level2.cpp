@@ -3,7 +3,7 @@
 Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
 
-    Door door(QPoint(115, -91), "Which British general was defeated by American forces in the Saratoga campaign of 1777?", &worldState);
+    Door door(QPoint(7, -106), "Which British general was defeated by American forces in the Saratoga campaign of 1777?", &worldState);
     door.insertQuesionResponse("Charles Cornwallis", false);
     door.insertQuesionResponse("John Burgoyne", true);
     door.insertQuesionResponse("William Howe", false);
