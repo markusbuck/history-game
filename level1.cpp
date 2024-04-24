@@ -34,6 +34,9 @@ Level1::Level1(QString background) : Level(background, QPoint(2, -80)) {
 }
 
 void Level1::renderCustom(QPainter *painter) {
+    if (isInDialog)
+        return;
+
     // un-mirror the text
     painter->save();
     painter->setPen(Qt::white);
