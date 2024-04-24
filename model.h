@@ -38,6 +38,8 @@ private:
 
     b2Vec2 windowDimensions;
 
+    void setupLevel(Level *level);
+
 public:
     Model(QWidget *parent = nullptr);
     ~Model();

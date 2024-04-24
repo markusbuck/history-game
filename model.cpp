@@ -11,19 +11,15 @@ Model::Model(QWidget *parent)
 
     Level1 *level1 = new Level1(":/level1");
 	levels.append(level1);
+    setupLevel(level1);
 
     Level2 *level2 = new Level2(":/background");
     levels.append(level2);
+    setupLevel(level2);
 
 	currentLevel = level1;
 
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
-
-    connect(&(*currentLevel), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
-            { emit generateQuestionnaire(questionText, responses); });
-
-	connect(&(*currentLevel), &Level::displayPopUp, this, [this](bool input, QString answer)
-			{ emit displayPopUp(input, answer); });
 
 	worldTimer.start();
 	elapsedTimer.start();
@@ -33,6 +29,14 @@ Model::Model(QWidget *parent)
 
 Model::~Model()
 {
+}
+
+void Model::setupLevel(Level *level) {
+    connect(&(*level), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
+            { emit generateQuestionnaire(questionText, responses); });
+
+    connect(&(*level), &Level::displayPopUp, this, [this](bool input, QString answer)
+            { emit displayPopUp(input, answer); });
 }
 
 void Model::updateDimensions(int width, int height) {
@@ -52,6 +56,13 @@ void Model::exitDialog() {
     currentLevel->exitDialog();
 
     currentLevelIndex++;
+
+    if (currentLevelIndex >= levels.size()) {
+        qDebug() << "finished all the levels!";
+        currentLevel = nullptr;
+        return;
+    }
+
     currentLevel = levels.at(currentLevelIndex);
 }
 
@@ -61,7 +72,7 @@ void Model::worldStep()
 	qint64 currentTime = elapsedTimer.nsecsElapsed();
 	qint64 elapsedTime = currentTime - lastFrameTime;
 
-	if (elapsedTime >= FRAME_TIME_TARGET && currentLevel)
+    if (elapsedTime >= FRAME_TIME_TARGET && currentLevel != nullptr)
 	{
 		lastFrameTime = currentTime;
 		currentLevel->step();
@@ -77,13 +88,13 @@ void Model::worldStep()
 void Model::renderScene()
 {
 	scene.fill(Qt::white);
-
-    currentLevel->renderBackground(&painter);
-
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::blue);
 
-    currentLevel->render(&painter);
+    if (currentLevel != nullptr) {
+        currentLevel->renderBackground(&painter);
+        currentLevel->render(&painter);
+    }
 
 	// fix scale
     float max = (float)qMin(scene.width(), scene.height());
@@ -97,5 +108,6 @@ void Model::renderScene()
 
 void Model::onPlayerMoveState(Player::Movement state, bool isDown)
 {
-	currentLevel->player->setMoveState(state, isDown);
+    if (currentLevel != nullptr)
+        currentLevel->player->setMoveState(state, isDown);
 }
