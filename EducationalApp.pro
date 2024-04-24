@@ -154,4 +154,5 @@ DISTFILES += \
 
 RESOURCES += \
     backgrounds.qrc \
+    sounds.qrc \
     sprites.qrc
