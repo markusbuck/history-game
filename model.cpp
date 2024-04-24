@@ -29,13 +29,14 @@ Model::Model(QWidget *parent)
 
     currentLevel = level1;
 
-    //emit showInitialContextDialogue();
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
 
 	worldTimer.start();
 	elapsedTimer.start();
 
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
+
+    //emit showInitialContextDialogue();
 }
 
 Model::~Model()
@@ -80,6 +81,7 @@ void Model::exitDialog() {
 
     currentLevel = levels.at(currentLevelIndex);
     emit showContextDialogue();
+    emit unlockLevel(currentLevelIndex);
 }
 
 void Model::worldStep()
@@ -126,4 +128,11 @@ void Model::onPlayerMoveState(Player::Movement state, bool isDown)
 {
     if (currentLevel != nullptr)
         currentLevel->player->setMoveState(state, isDown);
+}
+
+void Model::onLevelSelected(int lvl)
+{
+    currentLevelIndex = lvl - 1;
+    currentLevel = levels.at(currentLevelIndex);
+    emit showContextDialogue();
 }

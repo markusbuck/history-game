@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Revolutionary</string>
   </property>
   <widget class="QPushButton" name="startLevel">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>500</width>
-     <height>250</height>
+     <height>171</height>
     </rect>
    </property>
    <property name="font">
@@ -37,9 +37,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>250</y>
+     <y>170</y>
      <width>501</width>
-     <height>251</height>
+     <height>161</height>
     </rect>
    </property>
    <property name="font">
@@ -58,14 +58,31 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
-     <height>500</height>
+     <width>501</width>
+     <height>501</height>
     </rect>
    </property>
    <property name="text">
     <string notr="true"/>
    </property>
   </widget>
+  <widget class="QPushButton" name="levelSelect">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>330</y>
+     <width>501</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Levels</string>
+   </property>
+  </widget>
+  <zorder>levelSelect</zorder>
+  <zorder>startLevel</zorder>
+  <zorder>context</zorder>
+  <zorder>popUp</zorder>
  </widget>
  <resources/>
  <connections/>

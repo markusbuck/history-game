@@ -3,7 +3,7 @@
 
 #include "wall.h"
 #include <QString>
-#include <box2d/box2d.h>
+#include <Box2D/Box2D.h>
 #include <QHash>
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
