@@ -16,10 +16,12 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     //doorQuestionDialog.hide();
     //Context
     startLevelDialogue.setModal(true);
+    //connect(&model, &Model::showInitialContextDialogue,&startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&startLevelDialogue, &StartLevelDialogue::retrieveContext, &model, &Model::getCurrentContext);
-    connect(&model,&Model::sendCurrentContext, &startLevelDialogue, &StartLevelDialogue::setContextDialogue);
-    //connect(this, &MainWindow::showDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&model, &Model::showContextDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    connect(&model,&Model::sendCurrentContext, &startLevelDialogue, &StartLevelDialogue::setContextDialogue);
+    connect(this, &MainWindow::showDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    emit showDialogue();
 
 
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
@@ -50,10 +52,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// void MainWindow::initialDialogue(){
-//     qDebug() << "initialDialogue in mainwindow is called";
-//     emit showDialogue();
-// }
+
 void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);

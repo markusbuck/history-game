@@ -19,6 +19,7 @@ Model::Model(QWidget *parent)
 
     currentLevel = level1;
 
+    //emit showInitialContextDialogue();
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
 
 	worldTimer.start();
@@ -32,8 +33,6 @@ Model::~Model()
 }
 
 void Model::setupLevel(Level *level) {
-    emit showContextDialogue();
-    qDebug() << "This is being executed";
     connect(&(*level), &Level::generateQuestionnaire, this, [this](QString questionText, QHash<QString, bool> responses)
             { emit generateQuestionnaire(questionText, responses); });
 
@@ -70,6 +69,7 @@ void Model::exitDialog() {
     }
 
     currentLevel = levels.at(currentLevelIndex);
+    emit showContextDialogue();
 }
 
 void Model::worldStep()

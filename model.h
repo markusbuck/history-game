@@ -50,6 +50,7 @@ signals:
     void displayPopUp(bool input, QString answer);
     void sendCurrentContext(QString context);
     void showContextDialogue();
+    //void showInitialContextDialogue();
 
 public slots:
     void worldStep();
