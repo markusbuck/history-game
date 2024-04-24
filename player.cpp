@@ -1,17 +1,12 @@
 #include "player.h"
 #include <QDebug>
 #include <QFile>
-#include <QMediaResource>
 
 Player::Player(QPoint location, WorldState* worldState)
     : width(16), height(16), movementStates(), sprite(":/right.png", 100, 100), jumpSound() {
 
-    QFile file(":/eaglescream.mp3");
-    if (file.open(QIODevice::ReadOnly)) {
-        QMediaResource resource(&file);
-        jumpSound.setSource(QUrl(resource.resolvedUrl()));
-    }
-
+    jumpSound.setSource(QUrl("qrc:/eaglescream.wav"));
+    jumpSound.setVolume(1.f);
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
