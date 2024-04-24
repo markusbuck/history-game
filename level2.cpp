@@ -2,15 +2,15 @@
 
 Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-    Door door(QPoint(115, -91), "George Washington was born in...", &worldState);
-    door.insertQuesionResponse("March 11, 1690", false);
-    door.insertQuesionResponse("April 20, 1215", false);
-    door.insertQuesionResponse("February 22, 1732", true);
-    door.insertQuesionResponse("December 9, 2025", false);
+    Door door(QPoint(115, -91), "Which British general was defeated by American forces in the Saratoga campaign of 1777?", &worldState);
+    door.insertQuesionResponse("Charles Cornwallis", false);
+    door.insertQuesionResponse("John Burgoyne", true);
+    door.insertQuesionResponse("William Howe", false);
+    door.insertQuesionResponse("Henry Clinton", false);
 
-    door.insertHint("George Washington had no biological children.");
-    door.insertHint("George Washingtons dentures\n were not made of wood.");
-    door.insertHint("George Washington loved to party.");
+    door.insertHint("George Washington had\n no biological\n children.");
+    door.insertHint("George Washingtons\n dentures were\n not made of wood.");
+    door.insertHint("George Washington loved\n to party.");
     door.insertHint("Hint 4");
     doors.append(door);
 
