@@ -11,6 +11,7 @@ StartLevelDialogue::StartLevelDialogue(QWidget *parent)
     connect(ui->startLevel, &QPushButton::clicked, this, &StartLevelDialogue::onClickedStartLevel);
     connect(ui->popUp,&QPushButton::clicked, this, &StartLevelDialogue::hidePopup);
     connect(ui->context,&QPushButton::clicked, this, &StartLevelDialogue::onClickedContext);
+    connect(ui->levelSelect, &QPushButton::clicked, this, &StartLevelDialogue::onLevelsClicked);
     this->hidePopup();
 }
 
@@ -37,6 +38,12 @@ void StartLevelDialogue::onClickedContext(){
                 "rgb(16, 80, 80);} QPushButton:pressed {background-color: "
                 "rgb(60,80,80);}"));
     ui->popUp->show();
+}
+
+void StartLevelDialogue::onLevelsClicked()
+{
+    QDialog::hide();
+    emit showLevelSelect();
 }
 
 StartLevelDialogue::~StartLevelDialogue()

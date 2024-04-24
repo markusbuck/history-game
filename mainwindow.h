@@ -9,6 +9,7 @@
 #include "player.h"
 #include "doorquestiondialog.h"
 #include "startleveldialogue.h"
+#include "levelselect.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -46,6 +47,7 @@ private:
     QPixmap scenePixmap;
     DoorQuestionDialog doorQuestionDialog;
     StartLevelDialogue startLevelDialogue;
+    LevelSelect levelSelect;
     QTransform transform;
 };
 

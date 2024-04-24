@@ -1,7 +1,7 @@
 #ifndef CONTACTLISTENER_H
 #define CONTACTLISTENER_H
 
-#include <box2D/box2D.h>
+#include <Box2D/Box2D.h>
 #include <functional>
 #include <map>
 

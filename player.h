@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <QPoint>
-#include <box2d/box2d.h>
+#include <Box2D/Box2D.h>
 #include <QMap>
 #include "WorldState.h"
 #include "QObject"

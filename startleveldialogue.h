@@ -18,10 +18,12 @@ public:
 signals:
     void sendStartLevel();
     void retrieveContext();
+    void showLevelSelect();
 
 public slots:
     void onClickedStartLevel();
     void onClickedContext();
+    void onLevelsClicked();
     void showDialogue();
     void hidePopup();
     void setContextDialogue(QString text);

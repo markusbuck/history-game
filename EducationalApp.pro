@@ -61,6 +61,7 @@ SOURCES += \
     level.cpp \
     level1.cpp \
     level2.cpp \
+    levelselect.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
@@ -124,6 +125,7 @@ HEADERS += \
     level.h \
     level1.h \
     level2.h \
+    levelselect.h \
     mainwindow.h \
     model.h \
     player.h \
@@ -133,6 +135,7 @@ HEADERS += \
 
 FORMS += \
     doorquestiondialog.ui \
+    levelselect.ui \
     mainwindow.ui \
     startleveldialogue.ui
 

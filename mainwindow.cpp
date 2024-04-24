@@ -1,7 +1,7 @@
 // mainwindow.cpp
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
- #include <QKeyEvent>
+#include <QKeyEvent>
 #include <QPainter>
 
 MainWindow::MainWindow(Model& model, QWidget *parent)
@@ -16,6 +16,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     //doorQuestionDialog.hide();
     //Context
     startLevelDialogue.setModal(true);
+    levelSelect.setModal(true);
     //connect(&model, &Model::showInitialContextDialogue,&startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&startLevelDialogue, &StartLevelDialogue::retrieveContext, &model, &Model::getCurrentContext);
     connect(&model, &Model::showContextDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
@@ -27,6 +28,13 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
 
+    //levels
+    connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    connect(&startLevelDialogue, &StartLevelDialogue::showLevelSelect, &levelSelect, &LevelSelect::onShowLevelDialog);
+    connect(&levelSelect, &LevelSelect::hideStartDialog, &startLevelDialogue, &StartLevelDialogue::onClickedStartLevel);
+    connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    connect(&model, &Model::unlockLevel, &levelSelect, &LevelSelect::onLevelUnlocked);
+    connect(&levelSelect, &LevelSelect::levelSelected, &model, &Model::onLevelSelected);
     //door
     // connect(this, &MainWindow::doorCollision, &model, &Model::onDoorCollisionState);
 

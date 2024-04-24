@@ -1,7 +1,7 @@
 #ifndef WORLDSTATE_H
 #define WORLDSTATE_H
 
-#include <box2D/box2D.h>
+#include <Box2D/Box2D.h>
 #include "contactlistener.h"
 
 const float SCALE_FACTOR = 5.0;

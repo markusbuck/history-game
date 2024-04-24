@@ -3,7 +3,7 @@
 #define MODEL_H
 
 #include <QTimer>
-#include <box2D/box2D.h>
+#include <Box2D/Box2D.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPixmap>
@@ -50,6 +50,7 @@ signals:
     void displayPopUp(bool input, QString answer);
     void sendCurrentContext(QString context);
     void showContextDialogue();
+    void unlockLevel(int lvl);
     //void showInitialContextDialogue();
 
 public slots:
@@ -59,6 +60,7 @@ public slots:
     void exitDialog();
     void updateDimensions(int width, int height);
     void getCurrentContext();
+    void onLevelSelected(int lvl);
 
 };
 
