@@ -33,6 +33,8 @@ void spriteSheet::renderSprite(QPainter *painter, QRect target){
             sprite,
             QRect(index * width, offsetY, width, height));
     }
+
+
 }
 
 void spriteSheet::mirror(bool horizontal, bool vertical){

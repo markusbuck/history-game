@@ -9,7 +9,7 @@ Model::Model(QWidget *parent)
 {
     painter.begin(&scene);
 
-    Level1 *level1 = new Level1(":/background");
+    Level1 *level1 = new Level1(":/level1");
 	levels.append(level1);
 
     Level2 *level2 = new Level2(":/background");
