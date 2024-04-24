@@ -85,6 +85,11 @@ signals:
      */
     void showDialogue();
 
+    /*!
+     * \brief showMenu - Emits when esc is pressed
+     */
+    void showMenu();
+
 protected:
     /*!
      * \brief paintEvent - This method will draw the scenes pixmap.

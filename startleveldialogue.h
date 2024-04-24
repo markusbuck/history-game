@@ -71,6 +71,8 @@ public slots:
      */
     void setContextDialogue(QString text);
 
+    void onShowMenu();
+
 private:
     Ui::StartLevelDialogue *ui;
 };

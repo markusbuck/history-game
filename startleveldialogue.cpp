@@ -20,6 +20,7 @@ void StartLevelDialogue::onClickedStartLevel(){
 }
 void StartLevelDialogue::showDialogue(){
 
+    ui->startLevel->setText("Start");
     QDialog::show();
     emit retrieveContext();
 }
@@ -49,5 +50,12 @@ void StartLevelDialogue::onLevelsClicked()
 StartLevelDialogue::~StartLevelDialogue()
 {
     delete ui;
+}
+
+void StartLevelDialogue::onShowMenu()
+{
+    ui->startLevel->setText("Resume");
+    QDialog::show();
+    emit retrieveContext();
 }
 

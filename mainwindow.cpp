@@ -22,6 +22,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(&model, &Model::showContextDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&model,&Model::sendCurrentContext, &startLevelDialogue, &StartLevelDialogue::setContextDialogue);
     connect(this, &MainWindow::showDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    connect(this, &MainWindow::showMenu, &startLevelDialogue, &StartLevelDialogue::onShowMenu);
     emit showDialogue();
 
 
@@ -101,9 +102,9 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
         case Qt::Key_Space:
             emit setPlayerMoveState(Player::Movement::jump, true);
             break;
-        // case Qt::Key_P:
-        //     emit doorCollision();
-        //     break;
+        case Qt::Key_Escape:
+             emit showMenu();
+             break;
     }
 }
 

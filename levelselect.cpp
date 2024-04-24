@@ -8,6 +8,8 @@ LevelSelect::LevelSelect(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->level1Button, &QPushButton::clicked, this, [this](){onLevelClicked(1);});
     connect(ui->level2Button, &QPushButton::clicked, this, [this](){onLevelClicked(2);});
+    connect(ui->level3Button, &QPushButton::clicked, this, [this](){onLevelClicked(3);});
+    connect(ui->level4Button, &QPushButton::clicked, this, [this](){onLevelClicked(4);});
     connect(ui->backButton, &QPushButton::clicked, this, &LevelSelect::onBackClicked);
 
     levels.push_back(ui->level1Button);
