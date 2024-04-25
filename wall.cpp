@@ -1,7 +1,10 @@
 #include "wall.h"
 
-Wall::Wall(float x, float y, float w, float h, WorldState* worldState)
-    : x(x), y(y), width(w), height(h) {
+Wall::Wall(float x, float y, float w, float h, WorldState* worldState):
+    x(x), y(y),
+    width(w), height(h)
+{
+    // create the body of the wall
     b2BodyDef wallBodyDef;
     wallBodyDef.position.Set(x + w / 2.0, y + h / 2.0);
     b2Body* wallBody = worldState->world->CreateBody(&wallBodyDef);

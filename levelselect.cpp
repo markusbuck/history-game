@@ -6,6 +6,8 @@ LevelSelect::LevelSelect(QWidget *parent) :
     ui(new Ui::LevelSelect)
 {
     ui->setupUi(this);
+
+    // setup level buttons
     connect(ui->level1Button, &QPushButton::clicked, this, [this](){onLevelClicked(1);});
     connect(ui->level2Button, &QPushButton::clicked, this, [this](){onLevelClicked(2);});
     connect(ui->level3Button, &QPushButton::clicked, this, [this](){onLevelClicked(3);});
@@ -17,11 +19,9 @@ LevelSelect::LevelSelect(QWidget *parent) :
     levels.push_back(ui->level3Button);
     levels.push_back(ui->level4Button);
 
+    // only enable the first one
     for(auto button : levels)
-    {
         button->setEnabled(false);
-    }
-
     ui->level1Button->setEnabled(true);
 }
 

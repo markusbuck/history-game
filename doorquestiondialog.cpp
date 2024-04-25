@@ -5,18 +5,21 @@ DoorQuestionDialog::DoorQuestionDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::DoorQuestionDialog)
 {
+    // setup
     ui->setupUi(this);
-
     ui->Popup->hide();
     setWindowFlags( Qt::CustomizeWindowHint );
 
+    // response connections
     connect(ui->Response1, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse1);
     connect(ui->Response2, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse2);
     connect(ui->Response3, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse3);
     connect(ui->Response4, &QPushButton::clicked, this, &DoorQuestionDialog::onClickedResponse4);
 
+    // hide popup on click
     connect(ui->Popup, &QPushButton::clicked, this, &DoorQuestionDialog::hidePopUp);
 
+    // close on exit
     connect(this, &QDialog::rejected, this, &DoorQuestionDialog::onTerminated);
 }
 
@@ -34,8 +37,6 @@ void DoorQuestionDialog::onPlayerCollision(QString questionText, QHash<QString, 
     ui->Response2->setText(responseText.at(1));
     ui->Response3->setText(responseText.at(2));
     ui->Response4->setText(responseText.at(3));
-
-    qDebug() << "Dialog:OnPlayerCollision";
 
     QDialog::show();
 }
@@ -57,27 +58,26 @@ void DoorQuestionDialog::onClickedResponse4() {
 }
 
 void DoorQuestionDialog::displayPopUp(bool response, QString answer) {
-    qDebug() << "Dialog:displayPopUp";
-
     QString text = response == true ? "That is correct!\n" : "That is not correct!\n";
     text += answer;
 
     doCloseAfterPopup = response;
-
     toggleResponseButtons(false);
 
-    if(response) {
+    // make the popup the correct color
+    if (response) {
         ui->Popup->setStyleSheet(
             QString("QPushButton {color: white; background-color: "
                     "rgb(0, 153, 0);} QPushButton:pressed {background-color: "
-                    "rgb(0,204,0);}")); ui->Popup->setText(text);
+                    "rgb(0,204,0);}"));
+        ui->Popup->setText(text);
     }
-
     else {
         ui->Popup->setStyleSheet(
             QString("QPushButton {color: white; background-color: "
                     "rgb(255, 0, 0);} QPushButton:pressed {background-color: "
-                    "rgb(255,51,51);}"));    ui->Popup->setText(text);
+                    "rgb(255,51,51);}"));
+        ui->Popup->setText(text);
     }
 
     ui->Popup->show();

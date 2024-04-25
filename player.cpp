@@ -2,11 +2,16 @@
 #include <QDebug>
 #include <QFile>
 
-Player::Player(QPoint location, WorldState* worldState)
-    : width(16), height(16), movementStates(), sprite(":/right.png", 100, 100), jumpSound() {
-
+Player::Player(QPoint location, WorldState* worldState) :
+    width(16), height(16),
+    movementStates(), sprite(":/right.png", 100, 100),
+    jumpSound()
+{
+    // jump sound fx
     jumpSound.setSource(QUrl("qrc:/eaglescream.wav"));
     jumpSound.setVolume(1.f);
+
+    // player body
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
@@ -26,15 +31,19 @@ Player::Player(QPoint location, WorldState* worldState)
     fixtureDef.friction = 0;
     body->CreateFixture(&fixtureDef);
 
+    // foot sensor
     dynamicBox.SetAsBox(1, 0.1, b2Vec2(0, -height / 2.0 + 0.05), 0);
     fixtureDef.isSensor = true;
     b2Fixture* foot = body->CreateFixture(&fixtureDef);
     foot->SetUserData( (void*)2 );
 
+    // when the player's body touches another world object
     worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *contactFixture, b2Fixture *thisFixture) {
+        // GetUserData is a void*, cast it into a value we can compare
         unsigned long long int contactData = (unsigned long long int) contactFixture->GetUserData();
         unsigned long long int sensorData = (unsigned long long int) thisFixture->GetUserData();
         if (began){
+            // contactData == 3 is a door
             if(contactData == 3) {
                 movementStates[Movement::keyLeft] = false;
                 movementStates[Movement::keyRight] = false;
@@ -99,6 +108,7 @@ void Player::step(float dt) {
     float desiredVel = 0;
     float jumpVel = 0;
 
+    // horizontal movement
     if (movementStates[Movement::keyLeft]){
         desiredVel += -walkSpeed;
         sprite.mirror(true, true);
@@ -108,6 +118,7 @@ void Player::step(float dt) {
         sprite.mirror(false, true);
     }
 
+    // sprite animation
     if(desiredVel == 0)
         sprite.setIndex(0);
     else if (elapsedSinceLastFrame > 0.08) {
@@ -115,8 +126,9 @@ void Player::step(float dt) {
         elapsedSinceLastFrame = 0;
     }
 
+    // vertical movement
     if (movementStates[Movement::jump] && currentContacts >= 1) {
-        jumpVel = getMass() * jumpPower; // feels slow, especially when reaching the peak
+        jumpVel = getMass() * jumpPower;
         movementStates[Movement::jump] = false;
         jumpSound.play();
     }
@@ -126,8 +138,8 @@ void Player::step(float dt) {
         applyForce(b2Vec2(0, -gravityScale * getMass() * 25.0f));
     }
 
+    // apply it
     float velChange = desiredVel - vel.x;
     float impulse = getMass() * velChange;
-
     applyImpulse(b2Vec2(impulse, jumpVel), getCenter());
 }

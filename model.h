@@ -9,11 +9,10 @@
 #include <QPixmap>
 #include <QVector>
 #include <QRect>
-#include "wall.h"
-#include "player.h"
 #include <QElapsedTimer>
-#include "WorldState.h"
+#include "player.h"
 #include "level.h"
+
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
  * CS 3505 Assignment 9: Educational App
@@ -135,6 +134,11 @@ public slots:
      * \brief getCurrentContext - This slot will get the context of the current level.
      */
     void getCurrentContext();
+
+    /*!
+     * \brief onLevelSelected - Select and load a new level.
+     * \param lvl - The current level selected.
+     */
     void onLevelSelected(int lvl);
 
 };

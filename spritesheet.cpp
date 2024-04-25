@@ -2,42 +2,39 @@
 #include <QImage>
 
 spriteSheet::spriteSheet(QString fileName, int width, int height, bool mirrorVertically):
-    sprite(fileName),
-    original(fileName),
-    width(width),
-    height(height),
-    index(0){
-
+    width(width), height(height),
+    index(0), original(fileName),
+    sprite(fileName)
+{
     sprite.mirror(false, mirrorVertically);
     mirrored = false;
 }
 
-void spriteSheet::incrementIndex(){
+void spriteSheet::incrementIndex() {
+    // increment depending on if it's mirrored
     if((index + 1) * width >= sprite.width())
         index = -1;
     index++;
 }
 
-void spriteSheet::setIndex(int value){
+void spriteSheet::setIndex(int value) {
     index = value;
 }
 
-void spriteSheet::renderSprite(QPainter *painter, QRect target){
-    if(mirrored) {
+void spriteSheet::renderSprite(QPainter *painter, QRect target) {
+    if(mirrored)
+        // account for mirroring which reverses indices
         painter->drawImage(target,
             sprite,
             QRect((sprite.width() - (index + 1) * width), offsetY, width, height));
-    }
-    else {
+    else
         painter->drawImage(target,
             sprite,
             QRect(index * width, offsetY, width, height));
-    }
-
-
 }
 
-void spriteSheet::mirror(bool horizontal, bool vertical){
+void spriteSheet::mirror(bool horizontal, bool vertical) {
+    // only update if it's been changed as it's a bit costly
     if (mirrored == horizontal)
         return;
     sprite = original.copy();

@@ -56,6 +56,7 @@ private:
     int index;
     int offsetY = 6;
 
+    // the original is used for mirroring
     QImage original;
     QImage sprite;
 };

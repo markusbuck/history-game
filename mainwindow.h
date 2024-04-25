@@ -112,10 +112,14 @@ protected:
 private:
     Ui::MainWindow *ui;
     Model& model;
-    QPixmap scenePixmap;
+
+    // dialogs
     DoorQuestionDialog doorQuestionDialog;
     StartLevelDialogue startLevelDialogue;
     LevelSelect levelSelect;
+
+    // rendering
+    QPixmap scenePixmap;
     QTransform transform;
 };
 

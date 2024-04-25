@@ -4,11 +4,11 @@
 #include <QPoint>
 #include <Box2D/Box2D.h>
 #include <QMap>
+#include <QSoundEffect>
+#include <QUrl>
 #include "WorldState.h"
 #include "QObject"
 #include "spritesheet.h"
-#include <QSoundEffect>
-#include <QUrl>
 
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
@@ -29,10 +29,13 @@ public:
 	Player(QPoint location, WorldState *worldState);
 
 	const int width, height;
+
+    // used for if player is grounded
+    int currentContacts = 0;
+
+    // player properties
     float walkSpeed = 35.0;
     float jumpPower = 75.0;
-
-	int currentContacts = 0;
 
     /*!
      * \brief render - This method will render the player to the screen.

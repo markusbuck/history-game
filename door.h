@@ -1,10 +1,12 @@
 #ifndef DOOR_H
 #define DOOR_H
 
-#include "wall.h"
+#include <QPoint>
 #include <QString>
 #include <Box2D/Box2D.h>
 #include <QHash>
+#include "WorldState.h"
+
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
  * CS 3505 Assignment 9: Educational App
@@ -15,7 +17,6 @@
 class Door {
 private:
     QPoint location;
-    bool isCorrect;
 
     b2Body* body;
 public:
@@ -59,9 +60,9 @@ public:
      */
     QString generateHint(bool isCorrect);
     QString correctText;
-    int width = 8, height = 16;
 
-    int currentContacts = 0;
+    // properties of the door
+    int width = 8, height = 16;
 
     /*!
      * \brief getTopLeft - This method will get the top left of the door.

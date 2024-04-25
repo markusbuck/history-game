@@ -1,13 +1,14 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "wall.h"
-#include "door.h"
 #include <QVector>
-#include "player.h"
-#include "WorldState.h"
 #include <QPainter>
 #include <QWidget>
+#include "wall.h"
+#include "door.h"
+#include "player.h"
+#include "WorldState.h"
+
 /*!
  * Authors: Kevin Soto, Zak Holt, Walker Hall, Brenden Suess, and Markus Buckwalter
  * CS 3505 Assignment 9: Educational App

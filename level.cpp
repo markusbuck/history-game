@@ -1,6 +1,8 @@
 #include "level.h"
 #include <QDebug>
 
+// (de)constructors
+
 Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(), background(backgroundPath), spawnPosition(spawnPosition) {
     // world creation
     b2Vec2 gravity(0.0f, -10.0);
@@ -16,6 +18,7 @@ Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(),
     //
     background.mirror(false, true);
 
+    // door contact
     connect(player, &Player::onDoorContact, this, &Level::onDoorCollisionState);
 }
 
@@ -24,11 +27,11 @@ Level::~Level() {
     delete player;
 }
 
+//
+
 void Level::movePlayerToStart() {
     player->setPosition(spawnPosition);
 }
-
-//
 
 void Level::createCollisionObject(int x, int y, int width, int height)
 {
@@ -36,7 +39,7 @@ void Level::createCollisionObject(int x, int y, int width, int height)
     collisionObjects.push_back(newWall);
 }
 
-//
+// door
 
 bool Level::isCorrectResponse(QString response, int doorIndex) {
     Door door = doors.at(doorIndex);
@@ -47,6 +50,28 @@ QString Level::generateHintResponse(QString response, int doorIndex) {
     Door door = doors.at(doorIndex);
     return door.generateHint(door.isCorrectResponse(response));
 }
+
+void Level::onDoorCollisionState() {
+    isInDialog = true;
+    QString doorQuestionText = doors.at(0).questionText;
+
+    QHash<QString, bool> questionResponses = doors.at(0).questionResponses;
+    emit generateQuestionnaire(doorQuestionText, questionResponses);
+}
+
+
+void Level::isInputCorrect(QString response) {
+    bool isCorrect = isCorrectResponse(response, 0);
+    QString messagePopUp = generateHintResponse(response, 0);
+
+    emit displayPopUp(isCorrect, messagePopUp);
+}
+
+void Level::exitDialog() {
+    isInDialog = false;
+}
+
+// updating & rendering
 
 void Level::step() {
     if (!worldState.world || isInDialog)
@@ -79,28 +104,4 @@ void Level::render(QPainter *painter) {
 
     b2Vec2 doorPosition = SCALE_FACTOR * door.getTopLeft();
     //painter->drawRect(doorPosition.x, doorPosition.y, door.width * SCALE_FACTOR, door.height * SCALE_FACTOR);
-}
-
-void Level::onDoorCollisionState() {
-    isInDialog = true;
-    QString doorQuestionText = doors.at(0).questionText;
-
-    QHash<QString, bool> questionResponses = doors.at(0).questionResponses;
-    qDebug() << "onDoorCollisionState";
-
-    emit generateQuestionnaire(doorQuestionText, questionResponses);
-}
-
-
-void Level::isInputCorrect(QString response) {
-    bool isCorrect = isCorrectResponse(response, 0);
-    QString messagePopUp = generateHintResponse(response, 0);
-
-    qDebug() << "isInputCorrect" << isCorrect;
-
-    emit displayPopUp(isCorrect, messagePopUp);
-}
-
-void Level::exitDialog() {
-    isInDialog = false;
 }

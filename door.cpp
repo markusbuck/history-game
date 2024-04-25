@@ -1,16 +1,15 @@
 #include "door.h"
+
 #include <QDebug>
 #include <QRandomGenerator>
-// Door::Door(QPoint location, QPoint p1, QPoint p2, int width, QString questionText, bool isCorrect, b2World* world)
-//     : location(location), questionText(questionText), isCorrect(isCorrect), hitBox(p1, p2, width, world) {
-// }
 
 Door::Door(QPoint location, QString questionText, WorldState* worldState)
-    : location(location), questionText(questionText), isCorrect(isCorrect)
+    : location(location), questionText(questionText)
 {
+    // create the door static body
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of player
+    bodyDef.position.Set(location.x() + width / 2, location.y() + height / 2); // center of door
     body = worldState->world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(width / 2.0 - .1, height / 2.0 - .1); // half sizes, 4w x 12h
@@ -20,14 +19,8 @@ Door::Door(QPoint location, QString questionText, WorldState* worldState)
     fixtureDef.friction = 0.3f;
     fixtureDef.isSensor = true;
     b2Fixture* fixture = body->CreateFixture(&fixtureDef);
+    // door id is 3
     fixture->SetUserData((void*)3);
-    // worldState->worldContact->addCallback(body, [this](bool began, b2Fixture *fixture) {
-    //     if (began)
-    //         currentContacts++;
-    //     else
-    //         currentContacts--;
-    // });
-
 }
 
 void Door::insertQuesionResponse(QString text, bool isCorrect) {
@@ -40,10 +33,8 @@ b2Vec2 Door::getTopLeft() {
 
 
 bool Door::isCorrectResponse(QString key) {
-    if(questionResponses.contains(key)) {
-
+    if(questionResponses.contains(key))
         return questionResponses.value(key);
-    }
 
     return false;
 }
@@ -53,12 +44,9 @@ void Door::insertHint(QString hint) {
 }
 
 QString Door::generateHint(bool isCorrect) {
-
-    if(isCorrect) {
+    if(isCorrect)
         return correctText;
-    }
 
     int randNum = QRandomGenerator::global()->bounded(4);
-
     return hints.at(randNum);
 }

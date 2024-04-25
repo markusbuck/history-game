@@ -1,16 +1,18 @@
 // model.cpp
 #include "model.h"
-#include "contactlistener.h"
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
 
-Model::Model(QWidget *parent)
-    : QWidget(parent), scene(640, 480), painter(), elapsedTimer(), windowDimensions(0., 0.)
+Model::Model(QWidget *parent) :
+    QWidget(parent), scene(640, 480),
+    painter(), elapsedTimer(),
+    windowDimensions(0., 0.)
 {
     painter.begin(&scene);
 
+    // levels
     Level1 *level1 = new Level1(":/level1");
 	levels.append(level1);
     setupLevel(level1);
@@ -29,12 +31,10 @@ Model::Model(QWidget *parent)
 
     currentLevel = level1;
 
+    // world start
 	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
-
 	worldTimer.start();
 	elapsedTimer.start();
-
-	connect(&worldTimer, &QTimer::timeout, this, &Model::worldStep);
 
     //emit showInitialContextDialogue();
 }
@@ -86,20 +86,17 @@ void Model::exitDialog() {
 
 void Model::worldStep()
 {
-
 	qint64 currentTime = elapsedTimer.nsecsElapsed();
 	qint64 elapsedTime = currentTime - lastFrameTime;
 
+    // render the physics at target 60 fps
     if (elapsedTime >= FRAME_TIME_TARGET && currentLevel != nullptr)
 	{
 		lastFrameTime = currentTime;
 		currentLevel->step();
-
-		// qreal frameRate = 1e9 / static_cast<qreal>(elapsedTime);
-		// int roundedFrameRate = qRound(frameRate);
-		// qDebug() << "Frame Rate:" << roundedFrameRate << "FPS";
 	}
 
+    // however render the scene as fast as possible
 	renderScene();
 }
 
@@ -109,6 +106,7 @@ void Model::renderScene()
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::blue);
 
+    // render the level as long as it exists
     if (currentLevel != nullptr) {
         currentLevel->renderBackground(&painter);
         currentLevel->render(&painter);

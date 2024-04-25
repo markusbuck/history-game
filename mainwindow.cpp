@@ -11,13 +11,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
 {
     ui->setupUi(this);
 
-    //doorQuestionDialog.setModal(true);
-    //doorQuestionDialog.show();
-    //doorQuestionDialog.hide();
-    //Context
+    // level dialog
     startLevelDialogue.setModal(true);
     levelSelect.setModal(true);
-    //connect(&model, &Model::showInitialContextDialogue,&startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&startLevelDialogue, &StartLevelDialogue::retrieveContext, &model, &Model::getCurrentContext);
     connect(&model, &Model::showContextDialogue, &startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&model,&Model::sendCurrentContext, &startLevelDialogue, &StartLevelDialogue::setContextDialogue);
@@ -25,26 +21,23 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(this, &MainWindow::showMenu, &startLevelDialogue, &StartLevelDialogue::onShowMenu);
     emit showDialogue();
 
-
+    // rendering
     connect(&model, &Model::renderSceneOnView, this, &MainWindow::onSceneRender);
+
+    // update player movement on key press/release
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
 
-    //levels
+    // levels
     connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showPreviousDialog);
     connect(&startLevelDialogue, &StartLevelDialogue::showLevelSelect, &levelSelect, &LevelSelect::onShowLevelDialog);
     connect(&levelSelect, &LevelSelect::hideStartDialog, &startLevelDialogue, &StartLevelDialogue::onClickedStartLevel);
     connect(&model, &Model::unlockLevel, &levelSelect, &LevelSelect::onLevelUnlocked);
     connect(&levelSelect, &LevelSelect::levelSelected, &model, &Model::onLevelSelected);
-    //door
-    // connect(this, &MainWindow::doorCollision, &model, &Model::onDoorCollisionState);
 
+    // when the door has been touched, provide proper data to show on dialog as well as show
     connect(&model, &Model::generateQuestionnaire, &doorQuestionDialog, &DoorQuestionDialog::onPlayerCollision);
-
     connect(&doorQuestionDialog, &DoorQuestionDialog::sendQuestionText, &model, &Model::isInputCorrect);
-
     connect(&model, &Model::displayPopUp, &doorQuestionDialog, &DoorQuestionDialog::displayPopUp);
-
-    // connect(&doorQuestionDialog, &DoorQuestionDialog::exitDialog, &model, &Model::exitDialog);
     connect(&doorQuestionDialog, &DoorQuestionDialog::exitDialog, [this] {
         if (!doorQuestionDialog.isHidden()) {
             doorQuestionDialog.hide();
@@ -52,6 +45,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
         }
     });
 
+    // rescaling the window works properly
     connect(this, &MainWindow::updateDimensions, &model, &Model::updateDimensions);
 }
 
@@ -64,7 +58,7 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.drawPixmap(0, 0, scenePixmap); // Draw the stored QPixmap
+    painter.drawPixmap(0, 0, scenePixmap);
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -101,6 +95,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
         case Qt::Key_Space:
             emit setPlayerMoveState(Player::Movement::jump, true);
             break;
+        // escape menu
         case Qt::Key_Escape:
              emit showMenu();
              break;
