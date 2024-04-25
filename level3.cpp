@@ -2,7 +2,6 @@
 
 Level3::Level3(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-
     Door door(QPoint(91, -106), "What was the British strategy in 1777 to deal with the rebellious American colonies?", &worldState);
     door.insertQuesionResponse("Dividing the colonies \n with a three-pronged \n military campaign.", true);
     door.insertQuesionResponse("Launching a direct \n assault on Philadelphia.", false);
@@ -14,7 +13,6 @@ Level3::Level3(QString background) : Level(background, QPoint(10, -60)) {
     door.insertHint("Focus on events leading up to \n Burgoyne's surrender and \n how it impacted the British.");
     door.insertHint("Consider the position \n of the British \n at this time.");
     doors.append(door);
-
     createCollisionObject(0., -111., 120., 5.);
     createCollisionObject(-1., -111., 1., 115.);
     createCollisionObject(120., -111., 1., 115.);
@@ -25,7 +23,6 @@ Level3::Level3(QString background) : Level(background, QPoint(10, -60)) {
 void Level3::renderCustom(QPainter *painter) {
     if (isInDialog)
         return;
-
     // un-mirror the text
     painter->save();
     painter->setPen(Qt::white);
@@ -33,9 +30,7 @@ void Level3::renderCustom(QPainter *painter) {
     QTransform transform;
     transform.scale(1.0, -1.0);
     painter->setTransform(transform, true);
-
     painter->drawText(QRectF(14, 27, 230, 207), Qt::AlignCenter | Qt::TextWordWrap, "The battlegrounds of Saratoga is now a national park.");
     painter->drawText(QRectF(325, 396, 183, 79), Qt::AlignCenter | Qt::TextWordWrap, "Benjamin Franklin was a diplomat.");
-
     painter->restore();
 }

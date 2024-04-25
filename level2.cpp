@@ -2,7 +2,6 @@
 
 Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-
     Door door(QPoint(7, -106), "Which of the following motivations behind the Declaration of Independence?", &worldState);
     door.insertQuesionResponse("Alliance with French", true);
     door.insertQuesionResponse("Personal Enmity", false);
@@ -14,15 +13,9 @@ Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     door.insertHint("Disregard personal\n or domestic concerns.");
     door.insertHint("Consider support needed\n to fend off Britian.");
     doors.append(door);
-
     createCollisionObject(0., -111., 120., 5.);
     createCollisionObject(-1., -111., 1., 115.);
-
-
     createCollisionObject(29., -107., 20., 13.);
-
-    // New level
-
     createCollisionObject(66., -20., 13., 4.);
     createCollisionObject(0., -70., 30., 5.);
     createCollisionObject(25., -70., 5., 10.);
@@ -40,7 +33,6 @@ Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
 void Level2::renderCustom(QPainter *painter) {
     if (isInDialog)
         return;
-
     // un-mirror the text
     painter->save();
     painter->setPen(Qt::white);
@@ -48,10 +40,8 @@ void Level2::renderCustom(QPainter *painter) {
     QTransform transform;
     transform.scale(1.0, -1.0);
     painter->setTransform(transform, true);
-
     painter->drawText(QRectF(30, 6, 249, 111), Qt::AlignCenter | Qt::TextWordWrap, "In the second Continential congress meeting George Washington was appointed Commander in chief.");
     painter->drawText(QRectF(416, 12, 149, 213), Qt::AlignCenter | Qt::TextWordWrap, "The draft of the Declaration of Independence underwent 86 changes before its final version.");
     painter->drawText(QRectF(347, 289, 218, 94), Qt::AlignCenter | Qt::TextWordWrap, "Eight signers of the Declaration of Independence were born in Britian.");
-
     painter->restore();
 }

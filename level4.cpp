@@ -2,7 +2,6 @@
 
 Level4::Level4(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-
     Door door(QPoint(91, -106), "What significant event followed the American victory at Saratoga in 1777?", &worldState);
     door.insertQuesionResponse("The signing of the Treaty of Paris.", false);
     door.insertQuesionResponse("The capture of Charleston, South Carolina.", false);
@@ -14,7 +13,6 @@ Level4::Level4(QString background) : Level(background, QPoint(10, -60)) {
     door.insertHint("Focus on events that \n brought crucial military \n and financial support.");
     door.insertHint("Consider the timing \n of the event in relation \n to the overall timeline of the war.");
     doors.append(door);
-
     createCollisionObject(0., -111., 120., 5.);
     createCollisionObject(-1., -111., 1., 115.);
     createCollisionObject(120., -111., 1., 115.);
@@ -25,7 +23,6 @@ Level4::Level4(QString background) : Level(background, QPoint(10, -60)) {
 void Level4::renderCustom(QPainter *painter) {
     if (isInDialog)
         return;
-
     // un-mirror the text
     painter->save();
     painter->setPen(Qt::white);
@@ -33,9 +30,7 @@ void Level4::renderCustom(QPainter *painter) {
     QTransform transform;
     transform.scale(1.0, -1.0);
     painter->setTransform(transform, true);
-
     painter->drawText(QRectF(0, 7, 338, 135), Qt::AlignCenter | Qt::TextWordWrap, "The three Americans, Adams, Franklin and Jay signed their names in alphabetical order on the treaty.");
     painter->drawText(QRectF(113, 464, 467, 77), Qt::AlignCenter | Qt::TextWordWrap, "General Cornwallis reported sick and didn't show up to the surrender.");
-
     painter->restore();
 }
