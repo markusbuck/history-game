@@ -35,7 +35,7 @@ public:
 
     // player properties
     float walkSpeed = 35.0;
-    float jumpPower = 75.0;
+    float jumpPower = 80.0;
 
     /*!
      * \brief render - This method will render the player to the screen.

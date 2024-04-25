@@ -1,12 +1,12 @@
 #include "level4.h"
 
-Level4::Level4(QString background) : Level(background, QPoint(10, -60)) {
+Level4::Level4(QString background) : Level(background, QPoint(90, -105)) {
     // Create levels question
-    Door door(QPoint(91, -106), "What significant event followed the American victory at Saratoga in 1777?", &worldState);
-    door.insertQuesionResponse("The signing of the Treaty of Paris.", false);
-    door.insertQuesionResponse("The capture of Charleston, South Carolina.", false);
-    door.insertQuesionResponse("The formation of the Franco-American alliance.", true);
-    door.insertQuesionResponse("The commencement of negotiations in Paris.", false);
+    Door door(QPoint(70, -60), "What significant event followed the American victory at Saratoga in 1777?", &worldState);
+    door.insertQuesionResponse("The signing of \n the Treaty of Paris.", false);
+    door.insertQuesionResponse("The capture of \n Charleston, South Carolina.", false);
+    door.insertQuesionResponse("The formation of \n the Franco-American \n alliance.", true);
+    door.insertQuesionResponse("The commencement \n of negotiations \n in Paris.", false);
     context = "Following the American victory at Saratoga, the American diplomat Benjamin Franklin negotiated a treaty of \n alliance with France in February 1778. The Franco-American alliance brought crucial military and financial support to the American \n cause, including French troops, ships, and loans, significantly bolstering the Continental Army's capabilities. After the failure of \n the northern campaign at Saratoga, the British shifted their focus to the southern colonies, hoping to rally Loyalist support \n and gain control of strategic ports and resources. British forces, led by General Charles Cornwallis, achieved initial successes \n in the South, capturing Charleston, South Carolina, and winning several battles. Despite British advances, American forces, \n led by generals such as Nathanael Greene and Daniel Morgan, employed guerrilla warfare tactics and waged a relentless \n campaign against British supply lines and outposts. The American victories at the Battles of King's Mountain (1780) and Cowpens (1781)  \n weakened British control in the South and boosted American morale. In 1781, American and French forces, under the \n command of General George Washington and the French General Rochambeau, laid siege to the British army under General Cornwallis at \n Yorktown, Virginia. The combined American-French forces effectively trapped Cornwallis's army by land and sea, leading to the \n surrender of the British forces on October 19, 1781. Negotiations for peace began in Paris in 1782, culminating in the signing of the \nTreaty of Paris on September 3, 1783. The treaty formally ended the American Revolutionary War and recognized the independence \n of the United States of America. Britain also agreed to withdraw its troops from American soil and established the \n boundaries of the new nation.";
     door.insertHint("Look for significant \n diplomatic development \n after Saratoga.");
     door.insertHint("Consider the involvement \n of Benjamin Franklin, a key \n American diplomat.");
@@ -16,8 +16,21 @@ Level4::Level4(QString background) : Level(background, QPoint(10, -60)) {
     createCollisionObject(0., -111., 120., 5.);
     createCollisionObject(-1., -111., 1., 115.);
     createCollisionObject(120., -111., 1., 115.);
-    createCollisionObject(0., -111., 10., 17.);
-    createCollisionObject(36., -111., 7., 57.);
+    createCollisionObject(0., -111., 18., 1.);
+    createCollisionObject(35., -87., 7., 54.);
+    createCollisionObject(35., -87., 85., 4.);
+    createCollisionObject(25., -31., 60., 2.);
+    createCollisionObject(0., -111., 16., 17.);
+    createCollisionObject(25., -87., 13., 5.);
+    createCollisionObject(0., -70., 10., 2.);
+    createCollisionObject(25., -57., 13., 3.);
+    createCollisionObject(81., -65., 7., 45.);
+    createCollisionObject(35., -87., 19., 17.);
+    createCollisionObject(68., -30., 18., 5.);
+    createCollisionObject(0., -44., 10., 2.);
+    createCollisionObject(63., -65., 45., 4.);
+    createCollisionObject(100., -42., 21., 4.);
+    createCollisionObject(79., -21., 18., 2.);
 }
 
 void Level4::renderCustom(QPainter *painter) {

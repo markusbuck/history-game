@@ -2,7 +2,7 @@
 
 Level3::Level3(QString background) : Level(background, QPoint(10, -60)) {
     // Create levels question
-    Door door(QPoint(91, -106), "What was the British strategy in 1777 to deal with the rebellious American colonies?", &worldState);
+    Door door(QPoint(102, -21), "What was the British strategy in 1777 to deal with the rebellious American colonies?", &worldState);
     door.insertQuesionResponse("Dividing the colonies \n with a three-pronged \n military campaign.", true);
     door.insertQuesionResponse("Launching a direct \n assault on Philadelphia.", false);
     door.insertQuesionResponse("Negotiating a peace\n treaty with \n American leaders.", false);
@@ -17,7 +17,20 @@ Level3::Level3(QString background) : Level(background, QPoint(10, -60)) {
     createCollisionObject(-1., -111., 1., 115.);
     createCollisionObject(120., -111., 1., 115.);
     createCollisionObject(0., -111., 10., 17.);
+    createCollisionObject(25., -87., 13., 5.);
+    createCollisionObject(0., -70., 10., 2.);
+    createCollisionObject(25., -57., 13., 3.);
     createCollisionObject(36., -111., 7., 57.);
+    createCollisionObject(57., -86., 7., 57.);
+    createCollisionObject(85., -109., 40., 12.);
+    createCollisionObject(95., -94., 45., 12.);
+    createCollisionObject(64., -78., 23., 4.);
+    createCollisionObject(64., -50., 19., 5.);
+    createCollisionObject(64., -44., 13., 5.);
+    createCollisionObject(64., -38., 6., 5.);
+    createCollisionObject(99., -63., 21., 4.);
+    createCollisionObject(106., -52., 21., 4.);
+    createCollisionObject(84., -21., 21., 1.);
 }
 
 void Level3::renderCustom(QPainter *painter) {

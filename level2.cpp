@@ -24,7 +24,7 @@ Level2::Level2(QString background) : Level(background, QPoint(10, -60)) {
     createCollisionObject(60., -49., 19., 10.);
     createCollisionObject(0., -30., 52., 4.);
     createCollisionObject(72., -50., 7., 30.);
-    createCollisionObject(85., -82., 30., 4.);
+    createCollisionObject(85., -82., 35., 4.);
     createCollisionObject(60., -83., 7., 30.);
     createCollisionObject(60., -90., 12., 6.);
     createCollisionObject(120., -111., 1., 115.);
