@@ -44,6 +44,6 @@ void Level3::renderCustom(QPainter *painter) {
     transform.scale(1.0, -1.0);
     painter->setTransform(transform, true);
     painter->drawText(QRectF(14, 27, 230, 207), Qt::AlignCenter | Qt::TextWordWrap, "The battlegrounds of Saratoga is now a national park.");
-    painter->drawText(QRectF(325, 396, 183, 79), Qt::AlignCenter | Qt::TextWordWrap, "Benjamin Franklin was a diplomat.");
+    painter->drawText(QRectF(400, 127, 200, 95), Qt::AlignCenter | Qt::TextWordWrap, "Benjamin Franklin was a diplomat.");
     painter->restore();
 }
