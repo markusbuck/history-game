@@ -10,13 +10,13 @@ make sure Qt Multimedia is installed, you can check by attempting to compile or 
 3. add components
 4. expand Qt
 5. go to your Qt version and under Additional Libraries it should say "Qt Multimedia"
-6. if it is not there go to the next sub-version higher and install the compiler along with it
-![example](./readme-imgs/image.png)
+6. if it is not there go to the next sub-version higher and install the compiler along with it  
+![example](./readme-imgs/image.png)    
 7. let it install then quit
 8. restart Qt Creator
-9. to build with the new kit, click the Projects button and under the **Build & Run** section, it should be greyed out, click to enable it
+9. to build with the new kit, click the Projects button and under the **Build & Run** section, it should be greyed out, click to enable it  
 ![example](./readme-imgs/image2.png)
-10. now select the new kit in your build profile
+10. now select the new kit in your build profile  
 ![example](./readme-imgs/image3.png)
 11. now build normally
 
