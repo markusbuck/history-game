@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Revolutionary</string>
   </property>
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
@@ -21,6 +21,11 @@
      <width>84</width>
      <height>27</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Abyssinica SIL</family>
+    </font>
    </property>
    <property name="text">
     <string>Back</string>
@@ -39,21 +44,49 @@
     <enum>Qt::Vertical</enum>
    </property>
    <widget class="QPushButton" name="level1Button">
+    <property name="font">
+     <font>
+      <family>Abyssinica SIL</family>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
      <string>Level One</string>
     </property>
    </widget>
    <widget class="QPushButton" name="level2Button">
+    <property name="font">
+     <font>
+      <family>Abyssinica SIL</family>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
      <string>Level Two</string>
     </property>
    </widget>
    <widget class="QPushButton" name="level3Button">
+    <property name="font">
+     <font>
+      <family>Abyssinica SIL</family>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
      <string>Level Three</string>
     </property>
    </widget>
    <widget class="QPushButton" name="level4Button">
+    <property name="font">
+     <font>
+      <family>Abyssinica SIL</family>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
      <string>Level Four</string>
     </property>

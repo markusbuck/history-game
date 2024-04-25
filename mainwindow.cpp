@@ -30,10 +30,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(this, &MainWindow::setPlayerMoveState, &model, &Model::onPlayerMoveState);
 
     //levels
-    connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showDialogue);
+    connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showPreviousDialog);
     connect(&startLevelDialogue, &StartLevelDialogue::showLevelSelect, &levelSelect, &LevelSelect::onShowLevelDialog);
     connect(&levelSelect, &LevelSelect::hideStartDialog, &startLevelDialogue, &StartLevelDialogue::onClickedStartLevel);
-    connect(&levelSelect, &LevelSelect::backToStart, &startLevelDialogue, &StartLevelDialogue::showDialogue);
     connect(&model, &Model::unlockLevel, &levelSelect, &LevelSelect::onLevelUnlocked);
     connect(&levelSelect, &LevelSelect::levelSelected, &model, &Model::onLevelSelected);
     //door
