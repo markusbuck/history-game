@@ -16,18 +16,22 @@ StartLevelDialogue::StartLevelDialogue(QWidget *parent) :
 void StartLevelDialogue::onClickedStartLevel() {
     this->hide();
 }
+
 void StartLevelDialogue::showDialogue() {
 
     ui->startLevel->setText("Start");
     QDialog::show();
     emit retrieveContext();
 }
+
 void StartLevelDialogue::hidePopup() {
     ui->popUp->hide();
 }
+
 void StartLevelDialogue::setContextDialogue(QString text) {
     ui->popUp->setText(text);
 }
+
 void StartLevelDialogue::onClickedContext() {
     ui->popUp->setStyleSheet(
         QString("QPushButton {color: white; background-color: "
