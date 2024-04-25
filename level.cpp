@@ -1,7 +1,7 @@
 #include "level.h"
 #include <QDebug>
 
-Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(), background(backgroundPath) {
+Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(), background(backgroundPath), spawnPosition(spawnPosition) {
     // world creation
     b2Vec2 gravity(0.0f, -10.0);
     b2World *world = new b2World(gravity);
@@ -22,6 +22,10 @@ Level::Level(QString backgroundPath, QPoint spawnPosition) : collisionObjects(),
 Level::~Level() {
     delete worldState.world;
     delete player;
+}
+
+void Level::movePlayerToStart() {
+    player->setPosition(spawnPosition);
 }
 
 //

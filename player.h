@@ -99,6 +99,12 @@ public:
      */
     void step(float);
 
+    /*!
+     * \brief setPosition - Set the position of the player.
+     * \param position - The location to move the player to.
+     */
+    void setPosition(QPoint position);
+
 signals:
     /*!
      * \brief onDoorContact - This will be emitted when the player has hit a door.

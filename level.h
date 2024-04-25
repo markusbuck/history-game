@@ -33,6 +33,7 @@ protected:
     QVector<Wall> collisionObjects;
     bool isInDialog = false;
     QImage background;
+    QPoint spawnPosition;
 signals:
     /*!
      * \brief generateQuestionnaire - This will be emitted to update the doors question text, and responses.
@@ -133,6 +134,11 @@ public:
      * \param painter - The painter to draw.
      */
     virtual void renderCustom(QPainter *painter) = 0;
+
+    /*!
+     * \brief movePlayerToStart - A method to move the player to the start of the level.
+     */
+    void movePlayerToStart();
 
     QVector<Door> doors;
     Player *player;

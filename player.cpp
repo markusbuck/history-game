@@ -77,6 +77,10 @@ b2Vec2 Player::getTopLeft() {
 
 //
 
+void Player::setPosition(QPoint position) {
+    body->SetTransform(b2Vec2(position.x(), position.y()), 0);
+}
+
 void Player::setMoveState(Movement state, bool isDown) {
     movementStates[state] = isDown;
 }

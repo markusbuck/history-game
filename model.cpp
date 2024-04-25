@@ -134,4 +134,5 @@ void Model::onLevelSelected(int lvl)
 {
     currentLevelIndex = lvl - 1;
     currentLevel = levels.at(currentLevelIndex);
+    currentLevel->movePlayerToStart();
 }
