@@ -59,3 +59,9 @@ void StartLevelDialogue::onShowMenu()
     emit retrieveContext();
 }
 
+void StartLevelDialogue::showPreviousDialog()
+{
+    QDialog::show();
+    emit retrieveContext();
+}
+

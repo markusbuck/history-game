@@ -24,9 +24,10 @@
    </property>
    <property name="font">
     <font>
-     <family>Vivaldi</family>
+     <family>Abyssinica SIL</family>
      <pointsize>20</pointsize>
      <italic>true</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -44,9 +45,10 @@
    </property>
    <property name="font">
     <font>
-     <family>Vivaldi</family>
+     <family>Abyssinica SIL</family>
      <pointsize>20</pointsize>
      <italic>true</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -62,6 +64,12 @@
      <height>501</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Abyssinica SIL</family>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string notr="true"/>
    </property>
@@ -74,6 +82,14 @@
      <width>501</width>
      <height>171</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Abyssinica SIL</family>
+     <pointsize>20</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Levels</string>

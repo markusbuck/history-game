@@ -71,7 +71,15 @@ public slots:
      */
     void setContextDialogue(QString text);
 
+    /*!
+     * \brief onShowMenu - This slot pulls up the menu with a resume option when the user presses escape
+     */
     void onShowMenu();
+
+    /*!
+     * \brief showPreviousDialog - This slot allows the level select to return to the previous dialog (Resume or Start)
+     */
+    void showPreviousDialog();
 
 private:
     Ui::StartLevelDialogue *ui;
