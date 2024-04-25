@@ -36,8 +36,8 @@ void Level1::renderCustom(QPainter *painter) {
     QTransform transform;
     transform.scale(1.0, -1.0);
     painter->setTransform(transform, true);
-    painter->drawText(QRectF(225, 13, 282, 100), Qt::AlignCenter | Qt::TextWordWrap, "In the Battle of Concord 73 Brittish soldiers died.");
-    painter->drawText(QRectF(290, 361, 264, 67), Qt::AlignCenter | Qt::TextWordWrap, "Paul Revere warned the colonists about the Brittish coming to Concord.");
+    painter->drawText(QRectF(225, 13, 282, 100), Qt::AlignCenter | Qt::TextWordWrap, "In the Battle of Concord 73 British soldiers died.");
+    painter->drawText(QRectF(290, 361, 264, 67), Qt::AlignCenter | Qt::TextWordWrap, "Paul Revere warned the colonists about the British coming to Concord.");
     painter->drawText(QRectF(67, 464, 372, 54), Qt::AlignCenter | Qt::TextWordWrap, "The colonists destroyed over 92,000 pounds of British tea.");
     painter->restore();
 }
